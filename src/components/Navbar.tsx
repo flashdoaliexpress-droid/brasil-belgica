@@ -46,7 +46,7 @@ export function Navbar({ active, onNavigate }: Props) {
           aria-label="Ir para o topo"
         >
           <img
-            src="/images/logo-header.png"
+            src="/images/logo-header.webp"
             alt="Brasil Bélgica F.C."
             className="h-12 md:h-14 w-auto"
           />

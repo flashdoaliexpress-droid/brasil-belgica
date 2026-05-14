@@ -9,7 +9,7 @@ export function SponsorsSection() {
 
         <div className="flex items-center justify-center">
           <img
-            src="/images/sponsors.png"
+            src="/images/sponsors.webp"
             alt="Patrocinadores e parceiros do Brasil Bélgica"
             className="w-full max-w-4xl h-auto"
             loading="lazy"

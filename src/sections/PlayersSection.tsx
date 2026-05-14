@@ -39,7 +39,7 @@ export function PlayersSection() {
       id="jogadores"
       className="relative min-h-screen pt-32 pb-section-gap overflow-hidden"
       style={{
-        backgroundImage: "url('/images/players-bg.png')",
+        backgroundImage: "url('/images/players-bg.webp')",
         backgroundSize: "cover",
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",

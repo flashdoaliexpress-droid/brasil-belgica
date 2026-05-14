@@ -6,10 +6,11 @@ export function HeroSection() {
     >
       <div className="absolute inset-0 z-0">
         <img
-          src="/images/hero-bg.png"
+          src="/images/hero-bg.webp"
           alt=""
           aria-hidden="true"
           className="w-full h-full object-cover object-bottom"
+          fetchPriority="high"
         />
         <div
           className="absolute inset-0"
@@ -20,12 +21,13 @@ export function HeroSection() {
         />
       </div>
 
-      <div className="relative z-10 flex flex-col items-center text-center px-container-padding-mobile md:px-container-padding-desktop max-w-4xl mx-auto mt-20">
+      <div className="relative z-10 flex flex-col items-center text-center px-container-padding-mobile md:px-container-padding-desktop max-w-4xl mx-auto -mt-10">
         <img
-          src="/images/logo-hero.png"
+          src="/images/logo-hero.webp"
           alt="Brasil Bélgica F.C."
-          className="w-72 md:w-96 h-auto mb-3 drop-shadow-2xl"
+          className="w-56 md:w-72 h-auto mb-3 drop-shadow-2xl"
           loading="eager"
+          fetchPriority="high"
         />
 
         <h1 className="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-secondary-fixed drop-shadow-lg uppercase">

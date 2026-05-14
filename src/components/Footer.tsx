@@ -13,7 +13,7 @@ export function Footer() {
       <div className="flex flex-col md:flex-row justify-between items-center w-full px-container-padding-mobile md:px-container-padding-desktop py-section-gap max-w-7xl mx-auto gap-10">
         <div className="flex flex-col items-center md:items-start gap-4">
           <img
-            src="/images/logo-header.png"
+            src="/images/logo-header.webp"
             alt="Brasil Bélgica F.C."
             className="h-14 w-auto"
             loading="lazy"

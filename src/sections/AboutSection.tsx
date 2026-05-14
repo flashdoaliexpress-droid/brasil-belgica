@@ -43,7 +43,7 @@ export function AboutSection() {
             <div className="md:col-span-5 flex items-center justify-center mt-8 md:mt-0">
               <div className="relative w-full aspect-[4/5] overflow-hidden bg-[#1a1558]">
                 <img
-                  src="/images/about.png"
+                  src="/images/about.webp"
                   alt="Brasil Bélgica — Jogador em ação"
                   className="w-full h-full object-cover"
                   loading="lazy"
