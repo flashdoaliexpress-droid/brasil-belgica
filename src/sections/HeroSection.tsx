@@ -33,14 +33,6 @@ export function HeroSection() {
         </h1>
       </div>
 
-      <div className="absolute bottom-10 left-1/2 -translate-x-1/2 z-10 animate-bounce-arrow">
-        <span
-          className="material-symbols-outlined text-secondary-fixed opacity-80"
-          style={{ fontSize: 36 }}
-        >
-          expand_more
-        </span>
-      </div>
     </section>
   );
 }
