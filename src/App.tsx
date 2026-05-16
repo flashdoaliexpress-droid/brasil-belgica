@@ -4,9 +4,11 @@ import { Footer } from "./components/Footer";
 import { HeroSection } from "./sections/HeroSection";
 import { AboutSection } from "./sections/AboutSection";
 import { PlayersSection } from "./sections/PlayersSection";
+import { InstagramSection } from "./sections/InstagramSection";
 import { SponsorsSection } from "./sections/SponsorsSection";
+import { InterviewsSection } from "./sections/InterviewsSection";
 
-type SectionId = "hero" | "sobre" | "jogadores" | "patrocinadores";
+type SectionId = "hero" | "sobre" | "jogadores" | "instagram" | "patrocinadores" | "entrevistas";
 
 function App() {
   const [activeSection, setActiveSection] = useState<SectionId>("hero");
@@ -17,7 +19,7 @@ function App() {
   }, []);
 
   useEffect(() => {
-    const sections: SectionId[] = ["hero", "sobre", "jogadores", "patrocinadores"];
+    const sections: SectionId[] = ["hero", "sobre", "jogadores", "instagram", "patrocinadores", "entrevistas"];
     const observer = new IntersectionObserver(
       (entries) => {
         for (const entry of entries) {
@@ -42,6 +44,8 @@ function App() {
         <HeroSection />
         <AboutSection />
         <PlayersSection />
+        <InstagramSection />
+        <InterviewsSection />
         <SponsorsSection />
       </main>
       <Footer />

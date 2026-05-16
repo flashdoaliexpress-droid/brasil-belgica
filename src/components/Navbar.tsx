@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useScrollNavbar } from "../hooks/useScrollNavbar";
 import { club } from "../data/club";
 
-type SectionId = "hero" | "sobre" | "jogadores" | "patrocinadores";
+type SectionId = "hero" | "sobre" | "jogadores" | "instagram" | "patrocinadores" | "entrevistas";
 
 interface NavLink {
   id: SectionId;
@@ -13,6 +13,8 @@ const links: NavLink[] = [
   { id: "hero", label: "INÍCIO" },
   { id: "sobre", label: "SOBRE" },
   { id: "jogadores", label: "JOGADORES" },
+  { id: "instagram", label: "INSTAGRAM" },
+  { id: "entrevistas", label: "ENTREVISTAS" },
   { id: "patrocinadores", label: "PATROCINADORES" },
 ];
 
@@ -52,7 +54,7 @@ export function Navbar({ active, onNavigate }: Props) {
           />
         </button>
 
-        <nav className="hidden md:flex items-center gap-10">
+        <nav className="hidden md:flex items-center gap-6">
           {links.map((link) => {
             const isActive = active === link.id;
             return (

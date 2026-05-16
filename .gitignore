@@ -12,6 +12,13 @@ dist
 dist-ssr
 *.local
 
+# Large source assets (não commitar — vídeos vão pro GitHub Releases, posts já estão em public/)
+src/entrevistas/
+src/posts do instagram/
+
+# Vídeos de entrevistas — hospedados no GitHub Releases, não no repo
+public/entrevistas/
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
