@@ -59,6 +59,14 @@ export default {
         "brand-yellow": "#FDDE00",
         "brand-red": "#D12209",
         "brand-green": "#009A39",
+
+        // Light editorial palette
+        "page": "#F7F6F4",
+        "page-alt": "#FFFFFF",
+        "ink": "#0D0C1A",
+        "stone": "#4B4B5A",
+        "dust": "#9095A0",
+        "hairline": "#E2E1EA",
       },
       borderRadius: {
         DEFAULT: "1rem",
@@ -75,15 +83,15 @@ export default {
       },
       fontFamily: {
         "label-md": ["Hanken Grotesk", "sans-serif"],
-        "headline-md": ["Bebas Neue", "sans-serif"],
-        "headline-sm": ["Bebas Neue", "sans-serif"],
-        "headline-xl-mobile": ["Bebas Neue", "sans-serif"],
+        "headline-md": ["Anton", "sans-serif"],
+        "headline-sm": ["Anton", "sans-serif"],
+        "headline-xl-mobile": ["Anton", "sans-serif"],
         "body-lg": ["Hanken Grotesk", "sans-serif"],
-        "headline-xl": ["Bebas Neue", "sans-serif"],
+        "headline-xl": ["Anton", "sans-serif"],
         "label-lg": ["Hanken Grotesk", "sans-serif"],
-        "headline-lg-mobile": ["Bebas Neue", "sans-serif"],
+        "headline-lg-mobile": ["Anton", "sans-serif"],
         "body-md": ["Hanken Grotesk", "sans-serif"],
-        "headline-lg": ["Bebas Neue", "sans-serif"],
+        "headline-lg": ["Anton", "sans-serif"],
       },
       fontSize: {
         "label-md": ["12px", { lineHeight: "14px", letterSpacing: "0.05em", fontWeight: "700" }],
@@ -109,9 +117,33 @@ export default {
           "0%, 100%": { transform: "translateY(0)" },
           "50%": { transform: "translateY(8px)" },
         },
+        fadeInUp: {
+          "0%": { opacity: "0", transform: "translateY(28px)" },
+          "100%": { opacity: "1", transform: "translateY(0)" },
+        },
+        fadeIn: {
+          "0%": { opacity: "0" },
+          "100%": { opacity: "1" },
+        },
+        slideInLeft: {
+          "0%": { opacity: "0", transform: "translateX(-24px)" },
+          "100%": { opacity: "1", transform: "translateX(0)" },
+        },
+        scaleIn: {
+          "0%": { opacity: "0", transform: "scale(0.95)" },
+          "100%": { opacity: "1", transform: "scale(1)" },
+        },
+        shimmer: {
+          "0%": { backgroundPosition: "-200% center" },
+          "100%": { backgroundPosition: "200% center" },
+        },
       },
       animation: {
         "bounce-arrow": "bounceArrow 1.6s ease-in-out infinite",
+        "fade-in-up": "fadeInUp 0.65s ease-out forwards",
+        "fade-in": "fadeIn 0.65s ease-out forwards",
+        "slide-in-left": "slideInLeft 0.65s ease-out forwards",
+        "scale-in": "scaleIn 0.5s ease-out forwards",
       },
     },
   },

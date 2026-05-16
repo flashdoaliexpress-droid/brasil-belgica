@@ -8,15 +8,15 @@
   }
 
   body {
-    @apply bg-primary-container text-on-background font-body-md antialiased;
+    @apply bg-page text-ink font-body-md antialiased;
     margin: 0;
     min-height: 100vh;
     overflow-x: hidden;
   }
 
   *::selection {
-    background-color: #ffe33d;
-    color: #211b00;
+    background-color: #1F185F;
+    color: #FFFFFF;
   }
 }
 
@@ -28,8 +28,15 @@
     display: inline-block;
   }
 
+  /* Used in light sections — navy underline */
   .bicolor-title-bottom {
-    border-bottom: 4px solid #ffe33d;
+    border-bottom: 3px solid #1F185F;
+    display: inline-block;
+  }
+
+  /* Used in dark sections — yellow underline */
+  .bicolor-title-bottom-dark {
+    border-bottom: 3px solid #ffe33d;
     display: inline-block;
   }
 
@@ -48,5 +55,19 @@
   }
   .hide-scrollbar::-webkit-scrollbar {
     display: none;
+  }
+
+  .transition-600 {
+    transition-duration: 600ms;
+  }
+
+  /* 3D title shadow — light sections */
+  .title-3d {
+    text-shadow: 2px 2px 0 rgba(1, 32, 249, 0.18), 3px 3px 0 rgba(1, 32, 249, 0.07);
+  }
+
+  /* 3D title shadow — dark sections */
+  .title-3d-dark {
+    text-shadow: 2px 2px 0 rgba(253, 222, 0, 0.30), 3px 3px 0 rgba(253, 222, 0, 0.12);
   }
 }

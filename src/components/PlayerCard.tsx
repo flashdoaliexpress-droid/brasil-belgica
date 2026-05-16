@@ -23,6 +23,9 @@ const positionStyle: Record<PlayerPosition, string> = {
   Volante: "bg-white/10 backdrop-blur-md text-on-surface border border-white/20",
   "Meio Campo": "bg-white/10 backdrop-blur-md text-on-surface border border-white/20",
   Atacante: "bg-brand-yellow text-black",
+  "Ponta Direita": "bg-brand-yellow text-black",
+  "Ponta Esquerda": "bg-brand-yellow text-black",
+  Centroavante: "bg-brand-yellow text-black",
 };
 
 export function PlayerCard({ player, active }: Props) {

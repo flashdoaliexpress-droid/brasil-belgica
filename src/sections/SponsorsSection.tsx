@@ -1,11 +1,27 @@
+import { useInView } from "../hooks/useInView";
+
 export function SponsorsSection() {
+  const { ref: titleRef, inView: titleVisible } = useInView();
+
   return (
-    <section id="patrocinadores" className="bg-[#1a1558] w-full py-section-gap">
+    <section id="patrocinadores" className="w-full py-section-gap" style={{ backgroundColor: "#1F185F" }}>
       <div className="max-w-7xl mx-auto px-container-padding-mobile md:px-container-padding-desktop">
-        <h2 className="font-headline-xl-mobile md:font-headline-xl text-headline-xl-mobile md:text-headline-xl uppercase flex flex-col leading-none mb-12 text-center md:text-left">
-          <span className="text-white">PATROCINADORES</span>
-          <span className="text-secondary-fixed">PARCEIROS</span>
-        </h2>
+        <div
+          ref={titleRef}
+          className={`mb-12 transition-all duration-700 ${titleVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-7"}`}
+        >
+          <div className="space-y-1.5 mb-4">
+            <div className="w-12 h-[3px] bg-[#0120F9]" />
+            <div className="w-7 h-[2px] bg-brand-yellow" />
+          </div>
+          <h2 className="font-headline-lg-mobile text-headline-lg-mobile md:font-headline-lg md:text-headline-lg text-white uppercase leading-none text-center md:text-left">
+            PATROCINADORES &amp; PARCEIROS
+          </h2>
+          <div className="space-y-1.5 mt-4 mb-0">
+            <div className="w-7 h-[2px] bg-brand-yellow" />
+            <div className="w-12 h-[3px] bg-[#0120F9]" />
+          </div>
+        </div>
 
         <div className="flex items-center justify-center">
           <img
@@ -16,7 +32,7 @@ export function SponsorsSection() {
           />
         </div>
 
-        <p className="font-body-md text-body-md text-on-surface-variant text-center mt-10 max-w-3xl mx-auto">
+        <p className="text-sm text-white/70 text-center mt-10 max-w-3xl mx-auto">
           Os patrocinadores apoiam o Brasil Bélgica e fazem parte do crescimento do clube,
           fortalecendo o projeto dentro e fora de campo. Com esse apoio, seguimos mais preparados
           para buscar grandes conquistas.

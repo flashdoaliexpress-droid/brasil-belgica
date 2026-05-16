@@ -1,3 +1,5 @@
+import logoHero from "../assets/Logo Hero.png";
+
 export function HeroSection() {
   return (
     <section
@@ -23,16 +25,12 @@ export function HeroSection() {
 
       <div className="relative z-10 flex flex-col items-center text-center px-container-padding-mobile md:px-container-padding-desktop max-w-4xl mx-auto -mt-10">
         <img
-          src="/images/logo-hero.webp"
+          src={logoHero}
           alt="Brasil Bélgica F.C."
-          className="w-56 md:w-72 h-auto mb-3 drop-shadow-2xl"
+          className="w-56 md:w-72 h-auto mb-3"
           loading="eager"
           fetchPriority="high"
         />
-
-        <h1 className="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-secondary-fixed drop-shadow-lg uppercase">
-          FUTEBOL, RAÍZES, BRUXELAS.
-        </h1>
       </div>
 
     </section>

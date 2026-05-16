@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { interviews, type Interview } from "../data/interviews";
-import { useInView } from "../hooks/useInView";
 
 function VideoModal({ interview, onClose }: { interview: Interview; onClose: () => void }) {
   useEffect(() => {
@@ -58,14 +57,10 @@ function VideoModal({ interview, onClose }: { interview: Interview; onClose: () 
   );
 }
 
-function ApresentacaoCard({ interview, index, onOpen }: { interview: Interview; index: number; onOpen: (i: Interview) => void }) {
-  const { ref, inView } = useInView(0.08);
-
+function ApresentacaoCard({ interview, onOpen }: { interview: Interview; onOpen: (i: Interview) => void }) {
   return (
     <div
-      ref={ref}
-      style={{ transitionDelay: `${index * 100}ms` }}
-      className={`group cursor-pointer transition-all duration-700 ${inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
+      className="group cursor-pointer"
       onClick={() => onOpen(interview)}
       role="button"
       tabIndex={0}
@@ -91,7 +86,7 @@ function ApresentacaoCard({ interview, index, onOpen }: { interview: Interview; 
         <div className="absolute inset-0 border-2 border-[#0120F9]/0 group-hover:border-[#0120F9]/30 transition-colors duration-300" />
       </div>
 
-      <div className="pt-4 pb-2 border-l-2 border-[#0120F9]/0 group-hover:border-[#0120F9]/40 pl-0 group-hover:pl-3 transition-all duration-300">
+      <div className="pt-4 border-l-2 border-[#0120F9]/0 group-hover:border-[#0120F9]/40 pl-0 group-hover:pl-3 transition-all duration-300">
         <h3 className="font-headline-md text-headline-md text-ink uppercase leading-none">
           {interview.name}
         </h3>
@@ -109,61 +104,55 @@ function ApresentacaoCard({ interview, index, onOpen }: { interview: Interview; 
 }
 
 interface Props {
-  onOpenAll: () => void;
+  onClose: () => void;
 }
 
-export function InterviewsSection({ onOpenAll }: Props) {
+export function ApresentacoesPage({ onClose }: Props) {
   const [activeVideo, setActiveVideo] = useState<Interview | null>(null);
-  const { ref: titleRef, inView: titleVisible } = useInView();
-
-  const featured = interviews.slice(0, 4);
 
   return (
     <>
-      <section id="entrevistas" className="bg-page py-section-gap overflow-hidden">
+      <div className="bg-page min-h-screen pt-24 pb-section-gap">
         <div className="max-w-7xl mx-auto px-container-padding-mobile md:px-container-padding-desktop">
-          <div
-            ref={titleRef}
-            className={`flex flex-col md:flex-row md:items-end md:justify-between mb-12 transition-all duration-700 ${titleVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-7"}`}
+          <button
+            type="button"
+            onClick={onClose}
+            className="flex items-center gap-2 text-[11px] font-bold text-brand-navy uppercase tracking-widest mb-10 hover:text-ink transition-colors group"
           >
-            <div>
-              <div className="space-y-1.5 mb-4">
-                <div className="w-12 h-[3px] bg-[#0120F9]" />
-                <div className="w-7 h-[2px] bg-brand-yellow" />
-              </div>
-              <h2 className="font-headline-lg-mobile text-headline-lg-mobile md:font-headline-lg md:text-headline-lg text-ink uppercase leading-none">
-                APRESENTAÇÕES DOS JOGADORES
-              </h2>
-              <div className="space-y-1.5 mt-4">
-                <div className="w-7 h-[2px] bg-brand-yellow" />
-                <div className="w-12 h-[3px] bg-[#0120F9]" />
-              </div>
-            </div>
+            <span className="material-symbols-outlined group-hover:-translate-x-1 transition-transform">
+              arrow_back
+            </span>
+            Voltar ao site
+          </button>
 
-            <button
-              type="button"
-              onClick={onOpenAll}
-              className="mt-6 md:mt-0 self-start md:self-auto flex items-center gap-2 text-[11px] font-bold text-brand-navy hover:text-ink transition-colors uppercase tracking-widest group"
-            >
-              Ver todas ({interviews.length})
-              <span className="material-symbols-outlined text-xl group-hover:translate-x-1 transition-transform">
-                arrow_forward
-              </span>
-            </button>
+          <div className="mb-12">
+            <div className="space-y-1.5 mb-4">
+              <div className="w-12 h-[3px] bg-[#0120F9]" />
+              <div className="w-7 h-[2px] bg-brand-yellow" />
+            </div>
+            <h1 className="font-headline-lg-mobile text-headline-lg-mobile md:font-headline-lg md:text-headline-lg text-ink uppercase leading-none">
+              TODAS AS APRESENTAÇÕES
+            </h1>
+            <div className="space-y-1.5 mt-4 mb-6">
+              <div className="w-7 h-[2px] bg-brand-yellow" />
+              <div className="w-12 h-[3px] bg-[#0120F9]" />
+            </div>
+            <p className="text-sm text-stone">
+              {interviews.length} apresentações de jogadores do Brasil Bélgica.
+            </p>
           </div>
 
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-gutter md:gap-8">
-            {featured.map((interview, i) => (
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-gutter md:gap-8">
+            {interviews.map((interview) => (
               <ApresentacaoCard
                 key={interview.id}
                 interview={interview}
-                index={i}
                 onOpen={setActiveVideo}
               />
             ))}
           </div>
         </div>
-      </section>
+      </div>
 
       {activeVideo && (
         <VideoModal interview={activeVideo} onClose={() => setActiveVideo(null)} />
