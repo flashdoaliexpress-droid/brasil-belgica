@@ -77,6 +77,7 @@ function InterviewCard({ interview, isActive, onOpen }: CardProps) {
             <video
               key={interview.video}
               src={interview.video}
+              poster={interview.thumbnail}
               autoPlay
               muted
               playsInline
