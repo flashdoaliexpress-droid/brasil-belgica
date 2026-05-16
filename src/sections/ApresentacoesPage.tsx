@@ -76,11 +76,6 @@ function ApresentacaoCard({ interview, onOpen }: { interview: Interview; onOpen:
         />
         <div className="absolute inset-0 bg-black/30 group-hover:bg-black/15 transition-colors duration-300" />
 
-        <div className="absolute inset-0 flex items-center justify-center">
-          <div className="w-14 h-14 rounded-full bg-white/90 group-hover:bg-white group-hover:scale-110 transition-all duration-300 flex items-center justify-center shadow-lg">
-            <span className="material-symbols-outlined text-brand-navy text-4xl">play_arrow</span>
-          </div>
-        </div>
 
 
         <div className="absolute inset-0 border-2 border-[#0120F9]/0 group-hover:border-[#0120F9]/30 transition-colors duration-300" />
