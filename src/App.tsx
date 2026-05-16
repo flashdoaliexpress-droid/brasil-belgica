@@ -45,8 +45,8 @@ function App() {
         <AboutSection />
         <PlayersSection />
         <InstagramSection />
-        <SponsorsSection />
         <InterviewsSection />
+        <SponsorsSection />
       </main>
       <Footer />
     </div>

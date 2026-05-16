@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import useEmblaCarousel from "embla-carousel-react";
 import { interviews, type Interview } from "../data/interviews";
 
@@ -59,32 +59,38 @@ interface CardProps {
 }
 
 function InterviewCard({ interview, isActive, onOpen }: CardProps) {
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    if (!isActive) return;
+    const vid = videoRef.current;
+    if (!vid) return;
+    vid.muted = true;
+    vid.play().catch(() => {/* autoplay bloqueado pelo browser */});
+  }, [isActive]);
+
   return (
-    <button
-      type="button"
-      onClick={() => onOpen(interview)}
-      className="w-full group block text-left border-0 p-0 bg-transparent cursor-pointer"
-      aria-label={`Assistir entrevista de ${interview.name}`}
-    >
-      <div className="relative overflow-hidden">
+    <div className="w-full">
+      <div
+        className="relative overflow-hidden cursor-pointer"
+        onClick={() => onOpen(interview)}
+        role="button"
+        tabIndex={0}
+        onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") onOpen(interview); }}
+        aria-label={`Assistir entrevista de ${interview.name}`}
+      >
         {isActive ? (
           <>
-            {/*
-              Apenas o card ativo carrega vídeo.
-              key garante que o elemento é desmontado quando o índice muda,
-              liberando o buffer do vídeo anterior da memória.
-            */}
             <video
-              key={interview.video}
+              ref={videoRef}
               src={interview.video}
               poster={interview.thumbnail}
-              autoPlay
               muted
               playsInline
               preload="metadata"
               className="w-full h-auto block pointer-events-none"
             />
-            <div className="absolute bottom-3 right-3 flex items-center gap-1 bg-brand-navy/80 px-2 py-1">
+            <div className="absolute bottom-3 right-3 flex items-center gap-1 bg-brand-navy/80 px-2 py-1 pointer-events-none">
               <span className="material-symbols-outlined text-[#FDDE00] text-base">volume_off</span>
               <span className="font-label-md text-label-md text-white">SEM SOM</span>
             </div>
@@ -97,9 +103,9 @@ function InterviewCard({ interview, isActive, onOpen }: CardProps) {
               loading="lazy"
               className="w-full h-auto block"
             />
-            <div className="absolute inset-0 bg-black/30 group-hover:bg-black/50 transition-colors flex items-center justify-center">
-              <div className="w-14 h-14 rounded-full bg-white/20 group-hover:bg-[#FDDE00] flex items-center justify-center transition-colors">
-                <span className="material-symbols-outlined text-white group-hover:text-[#1a1558] text-4xl transition-colors">
+            <div className="absolute inset-0 bg-black/30 hover:bg-black/50 transition-colors flex items-center justify-center">
+              <div className="w-14 h-14 rounded-full bg-white/20 hover:bg-[#FDDE00] flex items-center justify-center transition-colors">
+                <span className="material-symbols-outlined text-white text-4xl">
                   play_arrow
                 </span>
               </div>
@@ -116,7 +122,7 @@ function InterviewCard({ interview, isActive, onOpen }: CardProps) {
           Entrevista
         </p>
       </div>
-    </button>
+    </div>
   );
 }
 
@@ -150,13 +156,6 @@ export function InterviewsSection() {
         </div>
 
         <div className="relative">
-          {/*
-            SEM padding no flex de slides.
-            O padding no flex criava espaço branco antes do primeiro card
-            quando Embla centralizava o slide ativo.
-            Com os cards em 30vw (desktop), (100-30)/2 = 35vw disponível
-            em cada lado → mais de 1 card adjacente visível naturalmente.
-          */}
           <div className="overflow-hidden" ref={emblaRef}>
             <div className="flex gap-3 md:gap-5">
               {interviews.map((interview, i) => {
