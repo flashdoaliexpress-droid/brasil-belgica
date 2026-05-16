@@ -64,7 +64,7 @@ export function AboutSection() {
               <img
                 src={sobreNos}
                 alt="Escudo Brasil Bélgica"
-                className="w-full max-w-sm h-auto object-contain"
+                className="w-full max-w-[160px] md:max-w-sm h-auto object-contain"
                 loading="lazy"
               />
             </div>
