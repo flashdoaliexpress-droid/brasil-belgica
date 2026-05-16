@@ -16,10 +16,10 @@ function v(slug: string): string {
 }
 
 export const interviews: Interview[] = [
-  { id: 1,  name: "PACHECO",    video: v("pacheco"),    thumbnail: "/thumbnails/pacheco.webp" },
-  { id: 2,  name: "JAM",        video: v("jam"),        thumbnail: "/thumbnails/jam.webp" },
-  { id: 3,  name: "JUNIOR",     video: v("junior"),     thumbnail: "/thumbnails/junior.webp" },
-  { id: 4,  name: "MARCOS",     video: v("marcos"),     thumbnail: "/thumbnails/marcos.webp" },
+  { id: 1,  name: "JAM",        video: v("jam"),        thumbnail: "/thumbnails/jam.webp" },
+  { id: 2,  name: "JUNIOR",     video: v("junior"),     thumbnail: "/thumbnails/junior.webp" },
+  { id: 3,  name: "MARCOS",     video: v("marcos"),     thumbnail: "/thumbnails/marcos.webp" },
+  { id: 4,  name: "PACHECO",    video: v("pacheco"),    thumbnail: "/thumbnails/pacheco.webp" },
   { id: 5,  name: "BRUNO",      video: v("bruno"),      thumbnail: "/thumbnails/bruno.webp" },
   { id: 6,  name: "GIL",        video: v("gil"),        thumbnail: "/thumbnails/gil.webp" },
   { id: 7,  name: "JESSE",      video: v("jesse"),      thumbnail: "/thumbnails/jesse.webp" },
