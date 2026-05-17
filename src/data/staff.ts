@@ -6,7 +6,7 @@ export const staff: StaffMember[] = [
     name: "Lins",
     role: "Presidente",
     photo: "/images/staff/lins.webp",
-    bio: "Liderança e visão estratégica do clube. Responsável pela direção institucional do Brasil Bélgica e pelas relações com a comunidade brasileira em Bruxelas.",
+    bio: "Liderança e visão estratégica do clube. Responsável pela direção institucional do Brasil e pelas relações com a comunidade brasileira em Bruxelas.",
   },
   {
     id: 2,

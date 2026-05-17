@@ -1,7 +1,9 @@
 import { leagueInfo, leagueStandings } from "../data/league";
 import { useInView } from "../hooks/useInView";
+import { useLanguage } from "../i18n/LanguageContext";
 
 export function LigaSection() {
+  const { t } = useLanguage();
   const { ref: titleRef, inView: titleVisible } = useInView();
   const { ref: tableRef, inView: tableVisible } = useInView();
 
@@ -19,7 +21,7 @@ export function LigaSection() {
                 <div className="w-7 h-[2px] bg-brand-yellow" />
               </div>
               <h2 className="font-headline-lg-mobile text-headline-lg-mobile md:font-headline-lg md:text-headline-lg text-ink uppercase leading-none">
-                LIGA TRABALHISTA
+                {t.liga.title}
               </h2>
               <div className="space-y-1.5 mt-4 mb-6">
                 <div className="w-7 h-[2px] bg-brand-yellow" />
@@ -27,7 +29,7 @@ export function LigaSection() {
               </div>
 
               <p className="text-sm text-stone mb-8">
-                {leagueInfo.description}
+                {t.liga.description}
               </p>
             </div>
           </div>
@@ -40,10 +42,10 @@ export function LigaSection() {
             <div className="bg-white border border-hairline overflow-hidden">
               <div className="px-5 py-4 border-b border-hairline flex items-center justify-between">
                 <h3 className="text-[11px] font-bold text-brand-navy uppercase tracking-widest">
-                  Classificação
+                  {t.liga.classification}
                 </h3>
                 <span className="text-[11px] font-medium text-dust uppercase tracking-widest">
-                  Rodada {leagueInfo.currentRound}
+                  {t.liga.round} {leagueInfo.currentRound}
                 </span>
               </div>
 
@@ -52,12 +54,12 @@ export function LigaSection() {
                   <thead>
                     <tr className="text-[11px] font-semibold text-dust border-b border-hairline">
                       <th className="text-left px-4 py-3 w-12">#</th>
-                      <th className="text-left px-2 py-3">Time</th>
-                      <th className="text-center px-2 py-3 w-10">J</th>
-                      <th className="text-center px-2 py-3 w-10 hidden sm:table-cell">V</th>
-                      <th className="text-center px-2 py-3 w-10 hidden sm:table-cell">E</th>
-                      <th className="text-center px-2 py-3 w-10 hidden sm:table-cell">D</th>
-                      <th className="text-right px-4 py-3 w-14">Pts</th>
+                      <th className="text-left px-2 py-3">{t.liga.colTeam}</th>
+                      <th className="text-center px-2 py-3 w-10">{t.liga.colPlayed}</th>
+                      <th className="text-center px-2 py-3 w-10 hidden sm:table-cell">{t.liga.colWins}</th>
+                      <th className="text-center px-2 py-3 w-10 hidden sm:table-cell">{t.liga.colDraws}</th>
+                      <th className="text-center px-2 py-3 w-10 hidden sm:table-cell">{t.liga.colLosses}</th>
+                      <th className="text-right px-4 py-3 w-14">{t.liga.colPoints}</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -87,7 +89,7 @@ export function LigaSection() {
                           </span>
                           {row.isUs && (
                             <span className="ml-2 text-[10px] font-bold text-brand-navy uppercase tracking-widest">
-                              · Nós
+                              · {t.liga.us}
                             </span>
                           )}
                         </td>

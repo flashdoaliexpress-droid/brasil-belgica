@@ -2,6 +2,7 @@ import { useState } from "react";
 import { staff } from "../data/staff";
 import type { StaffMember } from "../types";
 import { useInView } from "../hooks/useInView";
+import { useLanguage } from "../i18n/LanguageContext";
 
 function initials(name: string): string {
   return name
@@ -12,7 +13,7 @@ function initials(name: string): string {
     .toUpperCase();
 }
 
-function StaffDetailCard({ member }: { member: StaffMember }) {
+function StaffDetailCard({ member, roleLabel, bio }: { member: StaffMember; roleLabel: string; bio: string }) {
   const [imgError, setImgError] = useState(false);
 
   return (
@@ -42,7 +43,7 @@ function StaffDetailCard({ member }: { member: StaffMember }) {
 
         <div className="absolute bottom-0 left-0 right-0 p-5">
           <p className="text-[10px] font-bold text-brand-yellow uppercase tracking-widest mb-1">
-            {member.role}
+            {roleLabel}
           </p>
           <h3 className="font-headline-md text-headline-md text-white uppercase leading-none">
             {member.name}
@@ -52,7 +53,7 @@ function StaffDetailCard({ member }: { member: StaffMember }) {
 
       <div className="p-6 border-t border-hairline flex-1">
         <p className="text-sm text-stone leading-relaxed">
-          {member.bio}
+          {bio}
         </p>
       </div>
     </article>
@@ -60,6 +61,7 @@ function StaffDetailCard({ member }: { member: StaffMember }) {
 }
 
 export function ComissaoSection() {
+  const { t } = useLanguage();
   const { ref: titleRef, inView: titleVisible } = useInView();
   const { ref: gridRef, inView: gridVisible } = useInView();
 
@@ -75,16 +77,14 @@ export function ComissaoSection() {
             <div className="w-7 h-[2px] bg-brand-yellow" />
           </div>
           <h2 className="font-headline-lg-mobile text-headline-lg-mobile md:font-headline-lg md:text-headline-lg text-ink uppercase leading-none">
-            COMISSÃO TÉCNICA
+            {t.comissao.title}
           </h2>
           <div className="space-y-1.5 mt-4 mb-6">
             <div className="w-7 h-[2px] bg-brand-yellow" />
             <div className="w-12 h-[3px] bg-[#0120F9]" />
           </div>
           <p className="text-sm text-stone">
-            Quem comanda o Brasil Bélgica dentro e fora de campo. Profissionais qualificados,
-            comprometidos e experientes — trabalhando com seriedade para desenvolver o clube e
-            buscar grandes resultados.
+            {t.comissao.subtitle}
           </p>
         </div>
 
@@ -93,17 +93,21 @@ export function ComissaoSection() {
           className={`grid grid-cols-1 md:grid-cols-3 gap-gutter md:gap-10 transition-all duration-700 delay-150 ${gridVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-7"}`}
         >
           {staff.map((s) => (
-            <StaffDetailCard key={s.id} member={s} />
+            <StaffDetailCard
+              key={s.id}
+              member={s}
+              roleLabel={t.comissao.roles[s.role] ?? s.role}
+              bio={t.comissao.staffBios[s.id] ?? s.bio ?? ""}
+            />
           ))}
         </div>
 
         <div className="mt-12 border-t border-hairline pt-10 max-w-3xl">
           <p className="text-sm text-stone italic">
-            "Vamos trabalhar com seriedade para desenvolver a equipe e buscar grandes resultados
-            dentro e fora de campo."
+            "{t.comissao.quote}"
           </p>
           <p className="text-[11px] font-bold text-brand-navy uppercase tracking-widest mt-3">
-            — Comissão Brasil Bélgica
+            {t.comissao.quoteAuthor}
           </p>
         </div>
       </div>

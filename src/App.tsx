@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
+import { LanguageProvider } from "./i18n/LanguageContext";
 import { Navbar } from "./components/Navbar";
 import { Footer } from "./components/Footer";
 import { HeroSection } from "./sections/HeroSection";
@@ -112,6 +113,7 @@ function App() {
   }, [view]);
 
   return (
+    <LanguageProvider>
     <div className="bg-page text-ink min-h-screen">
       <Navbar active={activeSection} onNavigate={handleNavigate} onOpenApresentacoes={openAllApresentacoes} />
       {view === "home" ? (
@@ -134,6 +136,7 @@ function App() {
       )}
       <Footer />
     </div>
+    </LanguageProvider>
   );
 }
 

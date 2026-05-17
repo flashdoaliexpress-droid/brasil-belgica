@@ -1,44 +1,48 @@
 import { matches } from "../data/matches";
 import type { Match } from "../types";
 import { useInView } from "../hooks/useInView";
+import { useLanguage } from "../i18n/LanguageContext";
 import bbeLogo from "../assets/Logo header scroll  - logo pro calendario.png";
 
-const monthShort = ["jan", "fev", "mar", "abr", "mai", "jun", "jul", "ago", "set", "out", "nov", "dez"];
-const weekdayShort = ["dom", "seg", "ter", "qua", "qui", "sex", "sáb"];
-
-function formatDate(iso: string) {
+function formatDate(iso: string, months: string[], weekdays: string[]) {
   const d = new Date(iso + "T12:00:00");
   return {
     day: String(d.getDate()).padStart(2, "0"),
-    month: monthShort[d.getMonth()],
-    weekday: weekdayShort[d.getDay()],
+    month: months[d.getMonth()],
+    weekday: weekdays[d.getDay()],
   };
 }
 
-function StatusBadge({ status }: { status: Match["status"] }) {
+function StatusBadge({ status, labels }: { status: Match["status"]; labels: { live: string; finished: string; next: string } }) {
   if (status === "live") {
     return (
       <span className="inline-flex items-center gap-1.5 text-[11px] font-bold tracking-wider text-brand-navy uppercase">
-        <span className="w-1.5 h-1.5 rounded-full bg-brand-navy animate-pulse" /> Ao vivo
+        <span className="w-1.5 h-1.5 rounded-full bg-brand-navy animate-pulse" /> {labels.live}
       </span>
     );
   }
   if (status === "finished") {
     return (
       <span className="inline-flex items-center text-[11px] font-bold tracking-wider text-dust">
-        Resultado
+        {labels.finished}
       </span>
     );
   }
   return (
     <span className="inline-flex items-center text-[11px] font-bold tracking-wider text-brand-navy">
-      Próximo
+      {labels.next}
     </span>
   );
 }
 
-function MatchCard({ match }: { match: Match }) {
-  const date = formatDate(match.date);
+function MatchCard({ match, months, weekdays, ourTeamLabel, statusLabels }: {
+  match: Match;
+  months: string[];
+  weekdays: string[];
+  ourTeamLabel: string;
+  statusLabels: { live: string; finished: string; next: string };
+}) {
+  const date = formatDate(match.date, months, weekdays);
   const isUs = (short: string) => short === "BBE";
   const finished = match.status === "finished";
 
@@ -46,7 +50,7 @@ function MatchCard({ match }: { match: Match }) {
     <article className="bg-white border border-hairline overflow-hidden hover:border-[#0120F9]/25 hover:shadow-sm transition-all duration-300">
       <div className="flex items-center justify-between px-5 py-3 border-b border-hairline">
         <div className="flex items-center gap-3 min-w-0">
-          <StatusBadge status={match.status} />
+          <StatusBadge status={match.status} labels={statusLabels} />
           <span className="text-[11px] font-medium text-dust tracking-wide truncate hidden sm:inline">
             {match.competition}
           </span>
@@ -68,7 +72,7 @@ function MatchCard({ match }: { match: Match }) {
               <div className="flex items-center gap-3 min-w-0">
                 {isOurs ? (
                   <div className="w-10 h-10 flex items-center justify-center flex-shrink-0 bg-white border border-hairline">
-                    <img src={bbeLogo} alt="Brasil Bélgica" className="w-8 h-8 object-contain" />
+                    <img src={bbeLogo} alt="Brasil" className="w-8 h-8 object-contain" />
                   </div>
                 ) : (
                   <div className="w-10 h-10 flex items-center justify-center text-[11px] font-bold flex-shrink-0 bg-stone/10 text-stone">
@@ -80,7 +84,7 @@ function MatchCard({ match }: { match: Match }) {
                     {team.name}
                   </p>
                   {isOurs && (
-                    <p className="text-[10px] text-dust tracking-wide">Nosso time</p>
+                    <p className="text-[10px] text-dust tracking-wide">{ourTeamLabel}</p>
                   )}
                 </div>
               </div>
@@ -103,9 +107,11 @@ function MatchCard({ match }: { match: Match }) {
 }
 
 export function CalendarioSection() {
+  const { t } = useLanguage();
   const upcoming = matches.filter((m) => m.status !== "finished");
   const finished = matches.filter((m) => m.status === "finished");
   const { ref: titleRef, inView: titleVisible } = useInView();
+  const statusLabels = { live: t.calendar.live, finished: t.calendar.finished, next: t.calendar.next };
 
   return (
     <section id="calendario" className="bg-page-alt w-full py-section-gap">
@@ -119,25 +125,25 @@ export function CalendarioSection() {
             <div className="w-7 h-[2px] bg-brand-yellow" />
           </div>
           <h2 className="font-headline-lg-mobile text-headline-lg-mobile md:font-headline-lg md:text-headline-lg text-ink uppercase leading-none">
-            CALENDÁRIO DE JOGOS
+            {t.calendar.title}
           </h2>
           <div className="space-y-1.5 mt-4 mb-6">
             <div className="w-7 h-[2px] bg-brand-yellow" />
             <div className="w-12 h-[3px] bg-[#0120F9]" />
           </div>
           <p className="text-sm text-stone max-w-2xl">
-            Acompanhe os próximos jogos e resultados do Brasil Bélgica na Liga Trabalhista de Bruxelas.
+            {t.calendar.subtitle}
           </p>
         </div>
 
         {upcoming.length > 0 && (
           <div className="mb-12">
             <h3 className="text-[11px] font-bold text-brand-navy uppercase tracking-widest mb-6">
-              Próximos jogos
+              {t.calendar.upcoming}
             </h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-gutter">
               {upcoming.map((m) => (
-                <MatchCard key={m.id} match={m} />
+                <MatchCard key={m.id} match={m} months={t.calendar.months} weekdays={t.calendar.weekdays} ourTeamLabel={t.calendar.ourTeam} statusLabels={statusLabels} />
               ))}
             </div>
           </div>
@@ -146,11 +152,11 @@ export function CalendarioSection() {
         {finished.length > 0 && (
           <div>
             <h3 className="text-[11px] font-bold text-dust uppercase tracking-widest mb-6">
-              Últimos resultados
+              {t.calendar.results}
             </h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-gutter">
               {finished.map((m) => (
-                <MatchCard key={m.id} match={m} />
+                <MatchCard key={m.id} match={m} months={t.calendar.months} weekdays={t.calendar.weekdays} ourTeamLabel={t.calendar.ourTeam} statusLabels={statusLabels} />
               ))}
             </div>
           </div>

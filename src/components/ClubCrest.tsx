@@ -15,7 +15,7 @@ export function ClubCrest({ size = 120, className = "" }: Props) {
       height={size}
       className={className}
       role="img"
-      aria-label="Escudo do Brasil Bélgica"
+      aria-label="Escudo do Brasil"
     >
       <defs>
         <linearGradient id="bb-ring" x1="0" y1="0" x2="0" y2="1">

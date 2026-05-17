@@ -4,7 +4,7 @@ export const news: NewsItem[] = [
   {
     id: 1,
     slug: "vitoria-lusitano",
-    title: "Brasil Bélgica supera Lusitano BX por 3 a 1 em casa",
+    title: "Brasil supera Lusitano BX por 3 a 1 em casa",
     category: "Resultado",
     excerpt:
       "Com gols de Pretaum, Jackson e Kaik, a equipe se mantém viva na briga pelo G-4 da Liga Trabalhista.",
@@ -12,7 +12,7 @@ export const news: NewsItem[] = [
     image: "/images/news/vitoria-lusitano.webp",
     featured: true,
     content:
-      "O Brasil Bélgica voltou a vencer em casa após uma sequência de duas rodadas sem triunfos. O time entrou em campo no Stade Roi Baudouin com postura ofensiva e abriu o placar logo aos 12 minutos do primeiro tempo. Pretaum, em grande fase, marcou o seu nono gol no campeonato. Na etapa final, Jackson ampliou de cabeça após cobrança de escanteio e Kaik fechou a conta nos minutos finais. O resultado mantém o clube vivo na briga pelo G-4 da Liga Trabalhista.",
+      "O Brasil voltou a vencer em casa após uma sequência de duas rodadas sem triunfos. O time entrou em campo no Stade Roi Baudouin com postura ofensiva e abriu o placar logo aos 12 minutos do primeiro tempo. Pretaum, em grande fase, marcou o seu nono gol no campeonato. Na etapa final, Jackson ampliou de cabeça após cobrança de escanteio e Kaik fechou a conta nos minutos finais. O resultado mantém o clube vivo na briga pelo G-4 da Liga Trabalhista.",
   },
   {
     id: 2,
@@ -24,7 +24,7 @@ export const news: NewsItem[] = [
     date: "2026-05-08",
     image: "/images/news/uniforme.webp",
     content:
-      "Em evento na sede do clube, o Brasil Bélgica revelou o uniforme oficial da temporada 2025/26. A camisa principal mantém o tradicional azul-marinho do clube, com detalhes em amarelo que remetem à bandeira brasileira. O uniforme reserva, na cor branca com listras verticais, homenageia as cores tradicionais belgas. A parceria com o fornecedor local fortalece o vínculo do clube com a comunidade.",
+      "Em evento na sede do clube, o Brasil revelou o uniforme oficial da temporada 2025/26. A camisa principal mantém o tradicional azul-marinho do clube, com detalhes em amarelo que remetem à bandeira brasileira. O uniforme reserva, na cor branca com listras verticais, homenageia as cores tradicionais belgas. A parceria com o fornecedor local fortalece o vínculo do clube com a comunidade.",
   },
   {
     id: 3,
@@ -44,11 +44,11 @@ export const news: NewsItem[] = [
     title: "Clube anuncia nova parceria comercial",
     category: "Patrocínio",
     excerpt:
-      "Acordo de dois anos fortalece a estrutura do Brasil Bélgica e abre novas frentes de captação.",
+      "Acordo de dois anos fortalece a estrutura do Brasil e abre novas frentes de captação.",
     date: "2026-04-28",
     image: "/images/news/parceria.webp",
     content:
-      "A diretoria do Brasil Bélgica oficializou um acordo de dois anos com um novo parceiro comercial. A negociação garante o suporte financeiro para a temporada 2025/26 e abre frentes adicionais de captação para o próximo ciclo. Os detalhes do contrato não foram divulgados, mas o presidente Lins destacou que a parceria é estratégica para o crescimento da estrutura do clube.",
+      "A diretoria do Brasil oficializou um acordo de dois anos com um novo parceiro comercial. A negociação garante o suporte financeiro para a temporada 2025/26 e abre frentes adicionais de captação para o próximo ciclo. Os detalhes do contrato não foram divulgados, mas o presidente Lins destacou que a parceria é estratégica para o crescimento da estrutura do clube.",
   },
   {
     id: 5,
@@ -65,7 +65,7 @@ export const news: NewsItem[] = [
   {
     id: 6,
     slug: "categoria-base",
-    title: "Brasil Bélgica avalia criação de categoria de base",
+    title: "Brasil avalia criação de categoria de base",
     category: "Clube",
     excerpt:
       "Diretoria estuda formato para crianças e adolescentes brasileiros em Bruxelas a partir de 2026/27.",

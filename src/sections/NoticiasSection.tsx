@@ -2,9 +2,10 @@ import { useState } from "react";
 import { news } from "../data/news";
 import type { NewsItem } from "../types";
 import { useInView } from "../hooks/useInView";
+import { useLanguage } from "../i18n/LanguageContext";
 
-function formatDate(iso: string) {
-  return new Date(iso + "T12:00:00").toLocaleDateString("pt-BR", {
+function formatDate(iso: string, locale: string) {
+  return new Date(iso + "T12:00:00").toLocaleDateString(locale, {
     day: "2-digit",
     month: "long",
     year: "numeric",
@@ -14,9 +15,11 @@ function formatDate(iso: string) {
 function NewsCard({
   item,
   large = false,
+  dateLocale,
 }: {
   item: NewsItem;
   large?: boolean;
+  dateLocale: string;
 }) {
   const [imgError, setImgError] = useState(false);
 
@@ -48,7 +51,7 @@ function NewsCard({
       </div>
 
       <p className="text-[11px] font-medium text-dust uppercase tracking-widest mb-2">
-        {formatDate(item.date)}
+        {formatDate(item.date, dateLocale)}
       </p>
       <h3
         className={`font-headline-md text-headline-md text-ink uppercase leading-tight group-hover:text-brand-navy transition-colors ${
@@ -70,6 +73,7 @@ interface Props {
 }
 
 export function NoticiasSection({ onOpenAll, onOpenItem }: Props) {
+  const { t } = useLanguage();
   const featured = news.find((n) => n.featured) ?? news[0];
   const rest = news.filter((n) => n.id !== featured.id).slice(0, 2);
   const { ref: titleRef, inView: titleVisible } = useInView();
@@ -87,7 +91,7 @@ export function NoticiasSection({ onOpenAll, onOpenItem }: Props) {
               <div className="w-7 h-[2px] bg-brand-yellow" />
             </div>
             <h2 className="font-headline-lg-mobile text-headline-lg-mobile md:font-headline-lg md:text-headline-lg text-ink uppercase leading-none">
-              NOTÍCIAS
+              {t.news.title}
             </h2>
             <div className="space-y-1.5 mt-4">
               <div className="w-7 h-[2px] bg-brand-yellow" />
@@ -100,19 +104,19 @@ export function NoticiasSection({ onOpenAll, onOpenItem }: Props) {
             onClick={onOpenAll}
             className="self-start md:self-auto inline-flex items-center gap-2 text-[11px] font-bold uppercase tracking-widest text-brand-navy hover:text-ink transition-colors group"
           >
-            Ver todas as notícias
+            {t.news.seeAll}
             <span className="material-symbols-outlined group-hover:translate-x-1 transition-transform">arrow_forward</span>
           </button>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-gutter md:gap-10">
           <div className="lg:col-span-7" onClick={() => onOpenItem(featured.slug)}>
-            <NewsCard item={featured} large />
+            <NewsCard item={featured} large dateLocale={t.dateLocale} />
           </div>
           <div className="lg:col-span-5 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-gutter md:gap-10">
             {rest.map((n) => (
               <div key={n.id} onClick={() => onOpenItem(n.slug)}>
-                <NewsCard item={n} />
+                <NewsCard item={n} dateLocale={t.dateLocale} />
               </div>
             ))}
           </div>

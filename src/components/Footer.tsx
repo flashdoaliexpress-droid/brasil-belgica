@@ -1,4 +1,5 @@
 import { club } from "../data/club";
+import { useLanguage } from "../i18n/LanguageContext";
 
 const INSTAGRAM_URL =
   "https://www.instagram.com/brasil_belgica10?igsh=MWJpc2VzNmJ1ejdnaA%3D%3D";
@@ -6,6 +7,7 @@ const WHATSAPP_URL =
   "https://api.whatsapp.com/send/?phone=32491744200&text&type=phone_number&app_absent=0&utm_source=ig";
 
 export function Footer() {
+  const { t } = useLanguage();
   const year = new Date().getFullYear();
 
   return (
@@ -14,12 +16,12 @@ export function Footer() {
         <div className="flex flex-col items-center md:items-start gap-4">
           <img
             src="/images/logo-header.webp"
-            alt="Brasil Bélgica F.C."
+            alt="Brasil F.C."
             className="h-14 w-auto"
             loading="lazy"
           />
           <p className="font-body-md text-body-md text-white/50 text-center md:text-left max-w-sm uppercase">
-            © {year} {club.name} F.C. — A força do futebol amador.
+            © {year} {club.name} F.C. — {t.footer.tagline}
           </p>
         </div>
 
@@ -28,7 +30,7 @@ export function Footer() {
             href={INSTAGRAM_URL}
             target="_blank"
             rel="noreferrer noopener"
-            aria-label="Instagram do Brasil Bélgica"
+            aria-label="Instagram do Brasil"
             className="group flex items-center gap-3 px-5 py-3 border border-white/15 hover:border-secondary-fixed/60 transition-colors"
           >
             <svg
@@ -49,7 +51,7 @@ export function Footer() {
             href={WHATSAPP_URL}
             target="_blank"
             rel="noreferrer noopener"
-            aria-label="WhatsApp do Brasil Bélgica"
+            aria-label="WhatsApp do Brasil"
             className="group flex items-center gap-3 px-5 py-3 border border-white/15 hover:border-secondary-fixed/60 transition-colors"
           >
             <svg

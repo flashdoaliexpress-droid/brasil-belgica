@@ -1,7 +1,9 @@
 import { titles } from "../data/titles";
 import { useInView } from "../hooks/useInView";
+import { useLanguage } from "../i18n/LanguageContext";
 
 export function TitulosSection() {
+  const { t } = useLanguage();
   const { ref: titleRef, inView: titleVisible } = useInView();
 
   return (
@@ -18,7 +20,7 @@ export function TitulosSection() {
                 <div className="w-7 h-[2px] bg-brand-yellow" />
               </div>
               <h2 className="font-headline-lg-mobile text-headline-lg-mobile md:font-headline-lg md:text-headline-lg text-ink uppercase leading-none">
-                TÍTULOS &amp; CONQUISTAS
+                {t.titles.title}
               </h2>
               <div className="space-y-1.5 mt-4 mb-6">
                 <div className="w-7 h-[2px] bg-brand-yellow" />
@@ -26,8 +28,7 @@ export function TitulosSection() {
               </div>
 
               <p className="text-sm text-stone mb-8 max-w-md">
-                A trajetória do Brasil Bélgica se constrói rodada após rodada — cada conquista é uma
-                marca da nossa história em Bruxelas.
+                {t.titles.subtitle}
               </p>
 
               <span className="material-symbols-outlined text-brand-yellow text-6xl mt-4" style={{ fontSize: "4rem" }}>

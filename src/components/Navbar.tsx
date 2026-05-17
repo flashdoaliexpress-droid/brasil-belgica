@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { useScrollNavbar } from "../hooks/useScrollNavbar";
-import { club } from "../data/club";
+import { useLanguage } from "../i18n/LanguageContext";
+import type { Locale } from "../i18n/translations";
 import logoColorido from "../assets/SOBRE NÓS.png";
 
 type SectionId =
@@ -15,18 +16,11 @@ type SectionId =
   | "comissao"
   | "patrocinadores";
 
-interface NavLink {
-  id: SectionId;
-  label: string;
-}
-
-const links: NavLink[] = [
-  { id: "hero",        label: "INÍCIO" },
-  { id: "sobre",       label: "SOBRE" },
-  { id: "calendario",  label: "CALENDÁRIO" },
-  { id: "jogadores",   label: "ELENCO" },
-  { id: "noticias",    label: "NOTÍCIAS" },
-  { id: "liga",        label: "LIGA" },
+const LOCALES: { value: Locale; flag: string; label: string }[] = [
+  { value: "pt", flag: "🇧🇷", label: "PT" },
+  { value: "en", flag: "🇬🇧", label: "EN" },
+  { value: "fr", flag: "🇫🇷", label: "FR" },
+  { value: "nl", flag: "🇳🇱", label: "NL" },
 ];
 
 interface Props {
@@ -35,9 +29,92 @@ interface Props {
   onOpenApresentacoes: () => void;
 }
 
+function LanguageSelector({ scrolled }: { scrolled: boolean }) {
+  const { locale, setLocale } = useLanguage();
+  const [open, setOpen] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+  const current = LOCALES.find((l) => l.value === locale)!;
+
+  const handleSelect = (value: Locale) => {
+    setLocale(value);
+    setOpen(false);
+  };
+
+  return (
+    <div ref={ref} className="relative hidden md:block">
+      <button
+        type="button"
+        onClick={() => setOpen((v) => !v)}
+        aria-haspopup="listbox"
+        aria-expanded={open}
+        aria-label="Selecionar idioma"
+        className={`flex items-center gap-1.5 text-[11px] font-bold tracking-[0.08em] uppercase transition-colors duration-300 px-2 py-1 rounded ${
+          scrolled
+            ? "text-ink hover:text-stone"
+            : "text-white/80 hover:text-white"
+        }`}
+      >
+        <span className="text-base leading-none">{current.flag}</span>
+        {current.label}
+        <span
+          className={`material-symbols-outlined text-[14px] transition-transform duration-200 ${open ? "rotate-180" : ""}`}
+          aria-hidden="true"
+        >
+          expand_more
+        </span>
+      </button>
+
+      {open && (
+        <>
+          <div
+            className="fixed inset-0 z-40"
+            onClick={() => setOpen(false)}
+            aria-hidden="true"
+          />
+          <ul
+            role="listbox"
+            aria-label="Idiomas disponíveis"
+            className="absolute right-0 top-full mt-2 z-50 bg-white border border-hairline shadow-md min-w-[120px] py-1"
+          >
+            {LOCALES.map((l) => (
+              <li key={l.value} role="option" aria-selected={l.value === locale}>
+                <button
+                  type="button"
+                  onClick={() => handleSelect(l.value)}
+                  className={`w-full flex items-center gap-2.5 px-4 py-2.5 text-[11px] font-bold tracking-[0.08em] uppercase transition-colors hover:bg-stone/10 ${
+                    l.value === locale ? "text-brand-navy" : "text-ink"
+                  }`}
+                >
+                  <span className="text-base leading-none">{l.flag}</span>
+                  {l.label}
+                  {l.value === locale && (
+                    <span className="material-symbols-outlined text-[13px] ml-auto text-brand-navy" aria-hidden="true">
+                      check
+                    </span>
+                  )}
+                </button>
+              </li>
+            ))}
+          </ul>
+        </>
+      )}
+    </div>
+  );
+}
+
 export function Navbar({ active, onNavigate, onOpenApresentacoes }: Props) {
   const scrolled = useScrollNavbar(80);
   const [menuOpen, setMenuOpen] = useState(false);
+  const { locale, setLocale, t } = useLanguage();
+
+  const navLinks = [
+    { id: "hero" as SectionId,        label: t.nav.home },
+    { id: "sobre" as SectionId,       label: t.nav.about },
+    { id: "calendario" as SectionId,  label: t.nav.calendar },
+    { id: "jogadores" as SectionId,   label: t.nav.squad },
+    { id: "noticias" as SectionId,    label: t.nav.news },
+    { id: "liga" as SectionId,        label: t.nav.league },
+  ];
 
   const handleClick = (id: SectionId) => {
     setMenuOpen(false);
@@ -70,13 +147,13 @@ export function Navbar({ active, onNavigate, onOpenApresentacoes }: Props) {
             {scrolled ? (
               <img
                 src={logoColorido}
-                alt="Brasil Bélgica F.C."
+                alt="Brasil F.C."
                 className="h-10 md:h-12 w-auto object-contain"
               />
             ) : (
               <img
                 src="/images/logo-header.webp"
-                alt="Brasil Bélgica F.C."
+                alt="Brasil F.C."
                 className="h-10 md:h-12 w-auto"
               />
             )}
@@ -85,7 +162,7 @@ export function Navbar({ active, onNavigate, onOpenApresentacoes }: Props) {
           <div className={`hidden md:block w-px h-5 mx-6 ${scrolled ? "bg-hairline" : "bg-white/20"}`} aria-hidden="true" />
 
           <nav className="hidden md:flex items-center gap-5">
-            {links.map((link) => {
+            {navLinks.map((link) => {
               const isActive = active === link.id;
               return (
                 <button
@@ -113,25 +190,13 @@ export function Navbar({ active, onNavigate, onOpenApresentacoes }: Props) {
                 scrolled ? "text-stone hover:text-ink" : "text-white/75 hover:text-white"
               }`}
             >
-              APRESENTAÇÕES
+              {t.nav.presentations}
             </button>
           </nav>
         </div>
 
-        {/* Instagram */}
-        <a
-          className={`hidden md:flex items-center gap-2 font-bold text-[11px] tracking-[0.08em] transition-colors duration-300 ${
-            scrolled ? "text-ink hover:text-stone" : "text-white/80 hover:text-white"
-          }`}
-          href={`https://instagram.com/${club.instagram}`}
-          target="_blank"
-          rel="noreferrer noopener"
-        >
-          <svg viewBox="0 0 24 24" width="13" height="13" className="fill-current flex-shrink-0" aria-hidden="true">
-            <path d="M12 2.2c3.2 0 3.584.012 4.85.07 1.17.054 1.804.249 2.227.413.56.218.96.478 1.38.898.42.42.68.82.898 1.38.164.423.36 1.057.413 2.227.058 1.266.07 1.645.07 4.85s-.012 3.584-.07 4.85c-.054 1.17-.249 1.804-.413 2.227a3.72 3.72 0 0 1-.898 1.38c-.42.42-.82.68-1.38.898-.423.164-1.057.36-2.227.413-1.266.058-1.645.07-4.85.07s-3.584-.012-4.85-.07c-1.17-.054-1.804-.249-2.227-.413a3.72 3.72 0 0 1-1.38-.898 3.72 3.72 0 0 1-.898-1.38c-.164-.423-.36-1.057-.413-2.227C2.212 15.584 2.2 15.205 2.2 12s.012-3.584.07-4.85c.054-1.17.249-1.804.413-2.227.218-.56.478-.96.898-1.38.42-.42.82-.68 1.38-.898.423-.164 1.057-.36 2.227-.413C8.416 2.212 8.795 2.2 12 2.2zm0-2.2C8.741 0 8.332.014 7.052.072 5.775.131 4.902.333 4.14.63a5.92 5.92 0 0 0-2.14 1.393A5.92 5.92 0 0 0 .63 4.14C.333 4.902.131 5.775.072 7.052.014 8.332 0 8.741 0 12s.014 3.668.072 4.948c.06 1.277.261 2.15.558 2.912a5.92 5.92 0 0 0 1.39 2.14 5.92 5.92 0 0 0 2.14 1.392c.762.297 1.635.5 2.912.558C8.332 23.986 8.741 24 12 24s3.668-.014 4.948-.072c1.277-.06 2.15-.261 2.912-.558a5.92 5.92 0 0 0 2.14-1.392 5.92 5.92 0 0 0 1.392-2.14c.297-.762.5-1.635.558-2.912.058-1.28.072-1.689.072-4.948s-.014-3.668-.072-4.948c-.06-1.277-.261-2.15-.558-2.912a5.92 5.92 0 0 0-1.392-2.14A5.92 5.92 0 0 0 19.86.63C19.098.333 18.225.131 16.948.072 15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zm0 10.162a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/>
-          </svg>
-          @{club.instagram}
-        </a>
+        {/* Language selector (desktop) */}
+        <LanguageSelector scrolled={scrolled} />
 
         {/* Hambúrguer mobile */}
         <button
@@ -146,7 +211,7 @@ export function Navbar({ active, onNavigate, onOpenApresentacoes }: Props) {
 
       {menuOpen && (
         <nav className="md:hidden bg-white border-t border-hairline px-container-padding-mobile py-6 flex flex-col gap-6">
-          {links.map((link) => (
+          {navLinks.map((link) => (
             <button
               key={link.id}
               type="button"
@@ -163,16 +228,30 @@ export function Navbar({ active, onNavigate, onOpenApresentacoes }: Props) {
             onClick={handleApresentacoes}
             className="text-[11px] font-bold tracking-[0.08em] uppercase text-left text-stone hover:text-ink transition-colors"
           >
-            APRESENTAÇÕES
+            {t.nav.presentations}
           </button>
-          <a
-            className="text-[11px] font-bold tracking-[0.08em] uppercase text-ink"
-            href={`https://instagram.com/${club.instagram}`}
-            target="_blank"
-            rel="noreferrer noopener"
-          >
-            @{club.instagram}
-          </a>
+
+          {/* Language selector mobile */}
+          <div className="pt-2 border-t border-hairline">
+            <p className="text-[10px] font-bold text-dust uppercase tracking-widest mb-3">Idioma</p>
+            <div className="flex gap-2 flex-wrap">
+              {LOCALES.map((l) => (
+                <button
+                  key={l.value}
+                  type="button"
+                  onClick={() => { setLocale(l.value); setMenuOpen(false); }}
+                  className={`flex items-center gap-1.5 px-3 py-2 text-[11px] font-bold tracking-[0.08em] uppercase border transition-colors ${
+                    l.value === locale
+                      ? "border-brand-navy text-brand-navy"
+                      : "border-hairline text-stone hover:text-ink hover:border-stone"
+                  }`}
+                >
+                  <span className="text-base leading-none">{l.flag}</span>
+                  {l.label}
+                </button>
+              ))}
+            </div>
+          </div>
         </nav>
       )}
     </header>

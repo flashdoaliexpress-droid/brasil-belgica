@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { players } from "../data/players";
 import type { Player } from "../types";
 import { useInView } from "../hooks/useInView";
+import { useLanguage } from "../i18n/LanguageContext";
 
 function initials(name: string) {
   return name.split(" ").map((p) => p[0]).slice(0, 2).join("").toUpperCase();
@@ -9,7 +10,13 @@ function initials(name: string) {
 
 
 /* Modal — white background */
-function PlayerModal({ player, onClose }: { player: Player; onClose: () => void }) {
+function PlayerModal({ player, onClose, positionLabel, jerseyLabel, skillsLabel }: {
+  player: Player;
+  onClose: () => void;
+  positionLabel: string;
+  jerseyLabel: string;
+  skillsLabel: string;
+}) {
   const [imgError, setImgError] = useState(false);
 
   useEffect(() => {
@@ -79,7 +86,7 @@ function PlayerModal({ player, onClose }: { player: Player; onClose: () => void 
             )}
 
             <p className="text-[11px] font-bold text-brand-navy uppercase tracking-widest mb-3">
-              {player.position}
+              {positionLabel}
             </p>
 
             <h3 className="text-2xl md:text-3xl font-bold text-ink uppercase leading-tight">
@@ -88,7 +95,7 @@ function PlayerModal({ player, onClose }: { player: Player; onClose: () => void 
 
             {player.number !== undefined && (
               <p className="text-sm text-dust mt-1">
-                Camisa nº {player.number}
+                {jerseyLabel} {player.number}
               </p>
             )}
 
@@ -100,7 +107,7 @@ function PlayerModal({ player, onClose }: { player: Player; onClose: () => void 
 
             {player.skills && player.skills.length > 0 && (
               <div className="mt-5">
-                <p className="text-[10px] font-bold text-dust uppercase tracking-widest mb-2">Habilidades</p>
+                <p className="text-[10px] font-bold text-dust uppercase tracking-widest mb-2">{skillsLabel}</p>
                 <p className="text-sm text-stone leading-relaxed">{player.skills.join(" · ")}</p>
               </div>
             )}
@@ -111,7 +118,7 @@ function PlayerModal({ player, onClose }: { player: Player; onClose: () => void 
   );
 }
 
-function PlayerGridCard({ player, index, onClick }: { player: Player; index: number; onClick: (p: Player) => void }) {
+function PlayerGridCard({ player, index, onClick, positionLabel }: { player: Player; index: number; onClick: (p: Player) => void; positionLabel: string }) {
   const [imgError, setImgError] = useState(false);
   const { ref, inView } = useInView(0.05);
 
@@ -119,7 +126,7 @@ function PlayerGridCard({ player, index, onClick }: { player: Player; index: num
     <div
       ref={ref}
       style={{ transitionDelay: `${(index % 5) * 80}ms` }}
-      className={`group relative cursor-pointer overflow-hidden bg-[#0f0d3e] transition-opacity duration-700 ${inView ? "opacity-100" : "opacity-0"}`}
+      className={`group relative cursor-pointer overflow-hidden bg-[#0f0d3e] transition-all duration-700 ring-0 hover:ring-2 focus-visible:ring-2 hover:ring-[#FDDE00] focus-visible:ring-[#FDDE00] hover:shadow-[0_0_18px_4px_rgba(253,222,0,0.45)] focus-visible:shadow-[0_0_18px_4px_rgba(253,222,0,0.45)] ${inView ? "opacity-100" : "opacity-0"}`}
       onClick={() => onClick(player)}
       role="button"
       tabIndex={0}
@@ -149,7 +156,7 @@ function PlayerGridCard({ player, index, onClick }: { player: Player; index: num
 
       {/* Jersey number */}
       {player.number !== undefined && (
-        <div className="absolute top-2 right-3 text-lg font-bold text-brand-yellow/30 leading-none select-none">
+        <div className="absolute top-2 right-3 text-lg font-bold text-brand-yellow/30 group-hover:text-[#FDDE00] group-hover:drop-shadow-[0_0_6px_#FDDE00] leading-none select-none transition-all duration-300">
           {player.number}
         </div>
       )}
@@ -157,7 +164,7 @@ function PlayerGridCard({ player, index, onClick }: { player: Player; index: num
       {/* Info */}
       <div className="absolute bottom-0 left-0 right-0 p-3 md:p-4">
         <p className="text-[10px] font-bold text-brand-yellow uppercase tracking-widest leading-none mb-1 truncate">
-          {player.position}
+          {positionLabel}
         </p>
         <h3 className="font-headline-sm text-headline-sm text-white uppercase leading-none truncate">
           {player.name}
@@ -168,6 +175,7 @@ function PlayerGridCard({ player, index, onClick }: { player: Player; index: num
 }
 
 export function PlayersSection() {
+  const { t } = useLanguage();
   const [activePlayer, setActivePlayer] = useState<Player | null>(null);
   const { ref: titleRef, inView: titleVisible } = useInView();
 
@@ -186,14 +194,14 @@ export function PlayersSection() {
             <div className="w-7 h-[2px] bg-brand-yellow" />
           </div>
           <h2 className="font-headline-lg-mobile text-headline-lg-mobile md:font-headline-lg md:text-headline-lg text-white uppercase leading-none">
-            NOSSOS JOGADORES
+            {t.players.title}
           </h2>
           <div className="space-y-1.5 mt-4 mb-6">
             <div className="w-7 h-[2px] bg-brand-yellow" />
             <div className="w-12 h-[3px] bg-[#0120F9]" />
           </div>
           <p className="text-sm text-white/60 max-w-md">
-            Clique num jogador para ver o perfil completo.
+            {t.players.clickHint}
           </p>
         </div>
 
@@ -204,13 +212,20 @@ export function PlayersSection() {
               player={player}
               index={i}
               onClick={setActivePlayer}
+              positionLabel={t.players.positions[player.position] ?? player.position}
             />
           ))}
         </div>
       </div>
 
       {activePlayer && (
-        <PlayerModal player={activePlayer} onClose={() => setActivePlayer(null)} />
+        <PlayerModal
+          player={activePlayer}
+          onClose={() => setActivePlayer(null)}
+          positionLabel={t.players.positions[activePlayer.position] ?? activePlayer.position}
+          jerseyLabel={t.players.jersey}
+          skillsLabel={t.players.skillsLabel}
+        />
       )}
     </section>
   );

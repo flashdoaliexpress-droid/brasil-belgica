@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
 import { news } from "../data/news";
 import type { NewsItem } from "../types";
+import { useLanguage } from "../i18n/LanguageContext";
 
-function formatDate(iso: string) {
-  return new Date(iso + "T12:00:00").toLocaleDateString("pt-BR", {
+function formatDate(iso: string, locale: string) {
+  return new Date(iso + "T12:00:00").toLocaleDateString(locale, {
     day: "2-digit",
     month: "long",
     year: "numeric",
@@ -13,9 +14,13 @@ function formatDate(iso: string) {
 function NewsRowCard({
   item,
   onOpen,
+  readMoreLabel,
+  dateLocale,
 }: {
   item: NewsItem;
   onOpen: (slug: string) => void;
+  readMoreLabel: string;
+  dateLocale: string;
 }) {
   const [imgError, setImgError] = useState(false);
 
@@ -53,7 +58,7 @@ function NewsRowCard({
 
         <div className="sm:col-span-7 p-6 md:p-8 flex flex-col justify-center">
           <p className="font-label-md text-label-md text-dust uppercase tracking-widest mb-3">
-            {formatDate(item.date)}
+            {formatDate(item.date, dateLocale)}
           </p>
           <h3 className="font-headline-md text-headline-md md:text-headline-lg md:font-headline-lg text-ink uppercase leading-tight group-hover:text-brand-navy transition-colors">
             {item.title}
@@ -62,7 +67,7 @@ function NewsRowCard({
             {item.excerpt}
           </p>
           <span className="font-label-lg text-label-lg text-brand-navy uppercase tracking-widest mt-4 inline-flex items-center gap-2 group-hover:text-brand-navy transition-colors">
-            Ler matéria
+            {readMoreLabel}
             <span className="material-symbols-outlined text-base">arrow_forward</span>
           </span>
         </div>
@@ -74,9 +79,15 @@ function NewsRowCard({
 function NewsDetail({
   item,
   onBack,
+  backToAllLabel,
+  publishedOnLabel,
+  dateLocale,
 }: {
   item: NewsItem;
   onBack: () => void;
+  backToAllLabel: string;
+  publishedOnLabel: string;
+  dateLocale: string;
 }) {
   const [imgError, setImgError] = useState(false);
 
@@ -89,7 +100,7 @@ function NewsDetail({
           className="inline-flex items-center gap-2 font-label-lg text-label-lg uppercase tracking-widest text-brand-navy hover:text-brand-navy transition-colors mb-8"
         >
           <span className="material-symbols-outlined">arrow_back</span>
-          Todas as notícias
+          {backToAllLabel}
         </button>
 
         <article>
@@ -102,7 +113,7 @@ function NewsDetail({
           </h1>
 
           <p className="font-label-lg text-label-lg text-dust uppercase tracking-widest mb-10">
-            Publicado em {formatDate(item.date)}
+            {publishedOnLabel} {formatDate(item.date, dateLocale)}
           </p>
 
           <div className="relative aspect-[16/9] bg-stone/10 mb-10 overflow-hidden">
@@ -143,6 +154,7 @@ interface Props {
 }
 
 export function NoticiasPage({ onClose, initialSlug }: Props) {
+  const { t } = useLanguage();
   const [selectedSlug, setSelectedSlug] = useState<string | null>(initialSlug ?? null);
 
   useEffect(() => {
@@ -156,7 +168,15 @@ export function NoticiasPage({ onClose, initialSlug }: Props) {
   const selected = selectedSlug ? news.find((n) => n.slug === selectedSlug) : null;
 
   if (selected) {
-    return <NewsDetail item={selected} onBack={() => setSelectedSlug(null)} />;
+    return (
+      <NewsDetail
+        item={selected}
+        onBack={() => setSelectedSlug(null)}
+        backToAllLabel={t.news.backToAll}
+        publishedOnLabel={t.news.publishedOn}
+        dateLocale={t.dateLocale}
+      />
+    );
   }
 
   return (
@@ -168,24 +188,23 @@ export function NoticiasPage({ onClose, initialSlug }: Props) {
           className="inline-flex items-center gap-2 font-label-lg text-label-lg uppercase tracking-widest text-brand-navy hover:text-brand-navy transition-colors mb-8"
         >
           <span className="material-symbols-outlined">arrow_back</span>
-          Voltar ao site
+          {t.news.backToSite}
         </button>
 
         <header className="mb-12 max-w-3xl">
           <div className="w-12 h-[3px] bg-brand-navy mb-6" aria-hidden="true" />
           <h1 className="font-headline-xl-mobile md:font-headline-xl text-headline-xl-mobile md:text-headline-xl uppercase leading-none">
-            <span className="text-ink">TODAS AS</span>{" "}
-            <span className="text-brand-navy">NOTÍCIAS</span>
+            <span className="text-ink">{t.news.allNewsTitle}</span>{" "}
+            <span className="text-brand-navy">{t.news.allNewsTitleHighlight}</span>
           </h1>
           <p className="font-body-lg text-body-lg text-stone mt-6">
-            O dia a dia do Brasil Bélgica. Resultados, bastidores, parcerias e as histórias por trás
-            de cada rodada na Liga Trabalhista de Bruxelas.
+            {t.news.allNewsSubtitle}
           </p>
         </header>
 
         <div className="space-y-6">
           {news.map((n) => (
-            <NewsRowCard key={n.id} item={n} onOpen={setSelectedSlug} />
+            <NewsRowCard key={n.id} item={n} onOpen={setSelectedSlug} readMoreLabel={t.news.readMore} dateLocale={t.dateLocale} />
           ))}
         </div>
       </div>

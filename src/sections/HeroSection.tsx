@@ -26,7 +26,7 @@ export function HeroSection() {
       <div className="relative z-10 flex flex-col items-center text-center px-container-padding-mobile md:px-container-padding-desktop max-w-4xl mx-auto -mt-10">
         <img
           src={logoHero}
-          alt="Brasil Bélgica F.C."
+          alt="Brasil F.C."
           className="w-56 md:w-72 h-auto mb-3"
           loading="eager"
           fetchPriority="high"

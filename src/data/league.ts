@@ -3,7 +3,7 @@ import type { LeagueStanding } from "../types";
 export const leagueStandings: LeagueStanding[] = [
   { position: 1, team: "Atlético Bruxelas", played: 7, wins: 6, draws: 1, losses: 0, points: 19 },
   { position: 2, team: "Maghreb United",    played: 7, wins: 5, draws: 1, losses: 1, points: 16 },
-  { position: 3, team: "Brasil Bélgica",    played: 7, wins: 4, draws: 2, losses: 1, points: 14, isUs: true },
+  { position: 3, team: "Brasil",    played: 7, wins: 4, draws: 2, losses: 1, points: 14, isUs: true },
   { position: 4, team: "FC Iberico",        played: 7, wins: 4, draws: 1, losses: 2, points: 13 },
   { position: 5, team: "Lusitano BX",       played: 7, wins: 3, draws: 1, losses: 3, points: 10 },
   { position: 6, team: "Schaerbeek United", played: 7, wins: 2, draws: 2, losses: 3, points: 8 },

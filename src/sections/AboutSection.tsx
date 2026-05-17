@@ -1,6 +1,6 @@
 import sobreNos from "../assets/SOBRE NÓS.png";
-import { aboutParagraphs } from "../data/club";
 import { useInView } from "../hooks/useInView";
+import { useLanguage } from "../i18n/LanguageContext";
 
 function TitleBars({ dark = false }: { dark?: boolean }) {
   return (
@@ -23,6 +23,7 @@ function TitleBarsBottom({ dark = false }: { dark?: boolean }) {
 export { TitleBars, TitleBarsBottom };
 
 export function AboutSection() {
+  const { t } = useLanguage();
   const { ref: headingRef, inView: headingVisible } = useInView();
   const { ref: textRef, inView: textVisible } = useInView();
   const { ref: imgRef, inView: imgVisible } = useInView();
@@ -40,8 +41,8 @@ export function AboutSection() {
               <h2
                 className="font-headline-lg-mobile text-headline-lg-mobile md:font-headline-lg md:text-headline-lg text-ink uppercase leading-none my-4"
               >
-                NOSSA{" "}
-                <span className="text-[#0120F9]">HISTÓRIA</span>
+                {t.about.title}{" "}
+                <span className="text-[#0120F9]">{t.about.titleHighlight}</span>
               </h2>
               <TitleBarsBottom />
             </div>
@@ -50,7 +51,7 @@ export function AboutSection() {
               ref={textRef}
               className={`font-body-lg text-body-lg text-stone space-y-6 transition-all duration-700 delay-150 mt-8 ${textVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-7"}`}
             >
-              {aboutParagraphs.map((p, i) => (
+              {t.about.paragraphs.map((p, i) => (
                 <p key={i}>{p}</p>
               ))}
             </div>
@@ -63,7 +64,7 @@ export function AboutSection() {
             <div className="relative w-full flex items-center justify-center">
               <img
                 src={sobreNos}
-                alt="Escudo Brasil Bélgica"
+                alt="Escudo Brasil"
                 className="w-full max-w-[160px] md:max-w-sm h-auto object-contain"
                 loading="lazy"
               />

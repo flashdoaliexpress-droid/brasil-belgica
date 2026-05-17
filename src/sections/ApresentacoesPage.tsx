@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { interviews, type Interview } from "../data/interviews";
+import { useLanguage } from "../i18n/LanguageContext";
 
 function VideoModal({ interview, onClose }: { interview: Interview; onClose: () => void }) {
   useEffect(() => {
@@ -57,7 +58,7 @@ function VideoModal({ interview, onClose }: { interview: Interview; onClose: () 
   );
 }
 
-function ApresentacaoCard({ interview, onOpen }: { interview: Interview; onOpen: (i: Interview) => void }) {
+function ApresentacaoCard({ interview, onOpen, presentationLabel }: { interview: Interview; onOpen: (i: Interview) => void; presentationLabel: string }) {
   return (
     <div
       className="group cursor-pointer"
@@ -91,7 +92,7 @@ function ApresentacaoCard({ interview, onOpen }: { interview: Interview; onOpen:
           </p>
         )}
         <p className="text-[10px] font-medium text-dust uppercase tracking-widest mt-0.5">
-          Apresentação
+          {presentationLabel}
         </p>
       </div>
     </div>
@@ -103,6 +104,7 @@ interface Props {
 }
 
 export function ApresentacoesPage({ onClose }: Props) {
+  const { t } = useLanguage();
   const [activeVideo, setActiveVideo] = useState<Interview | null>(null);
 
   return (
@@ -117,7 +119,7 @@ export function ApresentacoesPage({ onClose }: Props) {
             <span className="material-symbols-outlined group-hover:-translate-x-1 transition-transform">
               arrow_back
             </span>
-            Voltar ao site
+            {t.apresentacoes.backToSite}
           </button>
 
           <div className="mb-12">
@@ -126,14 +128,14 @@ export function ApresentacoesPage({ onClose }: Props) {
               <div className="w-7 h-[2px] bg-brand-yellow" />
             </div>
             <h1 className="font-headline-lg-mobile text-headline-lg-mobile md:font-headline-lg md:text-headline-lg text-ink uppercase leading-none">
-              TODAS AS APRESENTAÇÕES
+              {t.apresentacoes.title}
             </h1>
             <div className="space-y-1.5 mt-4 mb-6">
               <div className="w-7 h-[2px] bg-brand-yellow" />
               <div className="w-12 h-[3px] bg-[#0120F9]" />
             </div>
             <p className="text-sm text-stone">
-              {interviews.length} apresentações de jogadores do Brasil Bélgica.
+              {interviews.length} {t.apresentacoes.countSuffix}
             </p>
           </div>
 
@@ -143,6 +145,7 @@ export function ApresentacoesPage({ onClose }: Props) {
                 key={interview.id}
                 interview={interview}
                 onOpen={setActiveVideo}
+                presentationLabel={t.apresentacoes.presentation}
               />
             ))}
           </div>

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { interviews, type Interview } from "../data/interviews";
 import { useInView } from "../hooks/useInView";
+import { useLanguage } from "../i18n/LanguageContext";
 
 function VideoModal({ interview, onClose }: { interview: Interview; onClose: () => void }) {
   useEffect(() => {
@@ -58,7 +59,7 @@ function VideoModal({ interview, onClose }: { interview: Interview; onClose: () 
   );
 }
 
-function ApresentacaoCard({ interview, index, onOpen }: { interview: Interview; index: number; onOpen: (i: Interview) => void }) {
+function ApresentacaoCard({ interview, index, onOpen, presentationLabel }: { interview: Interview; index: number; onOpen: (i: Interview) => void; presentationLabel: string }) {
   const { ref, inView } = useInView(0.08);
 
   return (
@@ -96,7 +97,7 @@ function ApresentacaoCard({ interview, index, onOpen }: { interview: Interview; 
           </p>
         )}
         <p className="text-[10px] font-medium text-dust uppercase tracking-widest mt-0.5">
-          Apresentação
+          {presentationLabel}
         </p>
       </div>
     </div>
@@ -108,6 +109,7 @@ interface Props {
 }
 
 export function InterviewsSection({ onOpenAll }: Props) {
+  const { t } = useLanguage();
   const [activeVideo, setActiveVideo] = useState<Interview | null>(null);
   const { ref: titleRef, inView: titleVisible } = useInView();
 
@@ -127,7 +129,7 @@ export function InterviewsSection({ onOpenAll }: Props) {
                 <div className="w-7 h-[2px] bg-brand-yellow" />
               </div>
               <h2 className="font-headline-lg-mobile text-headline-lg-mobile md:font-headline-lg md:text-headline-lg text-ink uppercase leading-none">
-                APRESENTAÇÕES DOS JOGADORES
+                {t.interviews.title}
               </h2>
               <div className="space-y-1.5 mt-4">
                 <div className="w-7 h-[2px] bg-brand-yellow" />
@@ -140,7 +142,7 @@ export function InterviewsSection({ onOpenAll }: Props) {
               onClick={onOpenAll}
               className="mt-6 md:mt-0 self-start md:self-auto flex items-center gap-2 text-[11px] font-bold text-brand-navy hover:text-ink transition-colors uppercase tracking-widest group"
             >
-              Ver todas ({interviews.length})
+              {t.interviews.seeAll} ({interviews.length})
               <span className="material-symbols-outlined text-xl group-hover:translate-x-1 transition-transform">
                 arrow_forward
               </span>
@@ -154,6 +156,7 @@ export function InterviewsSection({ onOpenAll }: Props) {
                 interview={interview}
                 index={i}
                 onOpen={setActiveVideo}
+                presentationLabel={t.interviews.presentation}
               />
             ))}
           </div>

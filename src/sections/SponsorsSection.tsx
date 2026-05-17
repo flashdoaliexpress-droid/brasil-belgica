@@ -1,6 +1,8 @@
 import { useInView } from "../hooks/useInView";
+import { useLanguage } from "../i18n/LanguageContext";
 
 export function SponsorsSection() {
+  const { t } = useLanguage();
   const { ref: titleRef, inView: titleVisible } = useInView();
 
   return (
@@ -15,7 +17,7 @@ export function SponsorsSection() {
             <div className="w-7 h-[2px] bg-brand-yellow" />
           </div>
           <h2 className="font-headline-lg-mobile text-headline-lg-mobile md:font-headline-lg md:text-headline-lg text-white uppercase leading-none text-center md:text-left">
-            PATROCINADORES &amp; PARCEIROS
+            {t.sponsors.title}
           </h2>
           <div className="space-y-1.5 mt-4 mb-0">
             <div className="w-7 h-[2px] bg-brand-yellow" />
@@ -26,16 +28,14 @@ export function SponsorsSection() {
         <div className="flex items-center justify-center">
           <img
             src="/images/sponsors.webp"
-            alt="Patrocinadores e parceiros do Brasil Bélgica"
+            alt={t.sponsors.alt}
             className="w-full max-w-4xl h-auto"
             loading="lazy"
           />
         </div>
 
         <p className="text-sm text-white/70 text-center mt-10 max-w-3xl mx-auto">
-          Os patrocinadores apoiam o Brasil Bélgica e fazem parte do crescimento do clube,
-          fortalecendo o projeto dentro e fora de campo. Com esse apoio, seguimos mais preparados
-          para buscar grandes conquistas.
+          {t.sponsors.description}
         </p>
       </div>
     </section>
