@@ -38,14 +38,14 @@ function PlayerModal({ player, onClose, positionLabel, jerseyLabel, skillsLabel 
       aria-label={`${player.name} — ${player.position}`}
     >
       <div
-        className="relative bg-white w-full max-w-2xl overflow-hidden flex flex-col md:flex-row max-h-[90dvh] animate-scale-in"
+        className="relative bg-white w-full max-w-2xl overflow-hidden flex flex-row max-h-[90dvh] animate-scale-in"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Photo column */}
-        <div className="relative w-full md:w-[45%] flex-shrink-0 bg-stone/10">
+        <div className="relative w-[42%] md:w-[45%] flex-shrink-0 bg-stone/10">
           {imgError ? (
-            <div className="h-64 flex items-center justify-center">
-              <span className="text-6xl font-bold text-brand-navy/30">
+            <div className="h-full min-h-[160px] flex items-center justify-center">
+              <span className="text-4xl font-bold text-brand-navy/30">
                 {initials(player.name)}
               </span>
             </div>
@@ -53,14 +53,14 @@ function PlayerModal({ player, onClose, positionLabel, jerseyLabel, skillsLabel 
             <img
               src={player.photo}
               alt={player.name}
-              className="w-full h-auto block"
+              className="w-full h-full object-cover object-top block"
               onError={() => setImgError(true)}
             />
           )}
         </div>
 
         {/* Details column */}
-        <div className="flex-1 p-6 md:p-8 flex flex-col gap-5 overflow-y-auto bg-white">
+        <div className="flex-1 p-4 md:p-8 flex flex-col gap-3 md:gap-5 overflow-y-auto bg-white">
           <button
             type="button"
             onClick={onClose}
@@ -79,16 +79,16 @@ function PlayerModal({ player, onClose, positionLabel, jerseyLabel, skillsLabel 
 
             {/* Number — plain, no shadow */}
             {player.number !== undefined && (
-              <p className="text-[4rem] font-bold leading-none text-[#0120F9]/15 select-none mb-1 hidden md:block">
+              <p className="text-[2.5rem] md:text-[4rem] font-bold leading-none text-[#0120F9]/15 select-none mb-1 hidden md:block">
                 {player.number}
               </p>
             )}
 
-            <p className="text-[11px] font-bold text-brand-navy uppercase tracking-widest mb-3">
+            <p className="text-[10px] md:text-[11px] font-bold text-brand-navy uppercase tracking-widest mb-2 md:mb-3">
               {positionLabel}
             </p>
 
-            <h3 className="text-2xl md:text-3xl font-bold text-ink uppercase leading-tight">
+            <h3 className="text-lg md:text-3xl font-bold text-ink uppercase leading-tight">
               {player.name}
             </h3>
 
