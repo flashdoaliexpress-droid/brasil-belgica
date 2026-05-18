@@ -28,9 +28,18 @@ export function LigaSection() {
                 <div className="w-12 h-[3px] bg-[#0120F9]" />
               </div>
 
-              <p className="text-sm text-stone mb-8">
+              <p className="text-sm text-stone mb-4">
                 {t.liga.description}
               </p>
+              <a
+                href="https://ftf.be/files/fw02526-38.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 font-label-lg text-label-lg text-brand-navy uppercase tracking-widest hover:opacity-70 transition-opacity mb-8"
+              >
+                Mais informações
+                <span className="material-symbols-outlined text-base">open_in_new</span>
+              </a>
             </div>
           </div>
 

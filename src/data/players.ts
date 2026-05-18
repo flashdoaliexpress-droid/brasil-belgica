@@ -153,4 +153,10 @@ export const players: Player[] = [
     number: 20,
     skills: ["Velocidade", "Drible", "Cruzamento", "Finta"],
   },
+  {
+    id: 20,
+    name: "João",
+    position: "Lateral Direito",
+    photo: "/posts/joao.webp",
+  },
 ];
