@@ -61,7 +61,7 @@ function NewsCard({
         {item.title}
       </h3>
       {large && (
-        <p className="text-sm text-stone mt-3">{item.excerpt}</p>
+        <p className="text-xs font-light text-stone mt-3 leading-relaxed">{item.excerpt}</p>
       )}
     </article>
   );
@@ -74,8 +74,8 @@ interface Props {
 
 export function NoticiasSection({ onOpenAll, onOpenItem }: Props) {
   const { t } = useLanguage();
-  const featured = news.find((n) => n.featured) ?? news[0];
-  const rest = news.filter((n) => n.id !== featured.id).slice(0, 2);
+  const featured = news.find((n) => n.id === 3) ?? news[0];
+  const rest = [news.find((n) => n.id === 2), news.find((n) => n.id === 11)].filter(Boolean) as typeof news;
   const { ref: titleRef, inView: titleVisible } = useInView();
 
   return (

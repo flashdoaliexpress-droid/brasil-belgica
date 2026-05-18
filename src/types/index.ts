@@ -37,14 +37,31 @@ export interface ClubInfo {
 
 export type MatchStatus = "upcoming" | "live" | "finished";
 
+export interface Goal {
+  minute: number;
+  player: string;
+  ownGoal?: boolean;
+}
+
+export interface MatchTeam {
+  name: string;
+  short: string;
+  score?: number;
+  logo?: string;
+  goals?: Goal[];
+}
+
 export interface Match {
   id: number;
   date: string;
   time: string;
   competition: string;
+  tournament?: string;
+  group?: string;
+  phase?: string;
   status: MatchStatus;
-  home: { name: string; short: string; score?: number };
-  away: { name: string; short: string; score?: number };
+  home: MatchTeam;
+  away: MatchTeam;
   venue: string;
 }
 
@@ -56,6 +73,7 @@ export interface NewsItem {
   excerpt: string;
   date: string;
   image: string;
+  video?: string;
   featured?: boolean;
   content?: string;
 }

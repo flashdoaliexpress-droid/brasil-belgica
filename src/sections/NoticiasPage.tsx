@@ -63,7 +63,7 @@ function NewsRowCard({
           <h3 className="font-headline-md text-headline-md md:text-headline-lg md:font-headline-lg text-ink uppercase leading-tight group-hover:text-brand-navy transition-colors">
             {item.title}
           </h3>
-          <p className="font-body-md text-body-md text-stone mt-3 line-clamp-2">
+          <p className="text-xs font-light text-stone mt-3 leading-relaxed line-clamp-2">
             {item.excerpt}
           </p>
           <span className="font-label-lg text-label-lg text-brand-navy uppercase tracking-widest mt-4 inline-flex items-center gap-2 group-hover:text-brand-navy transition-colors">
@@ -116,9 +116,16 @@ function NewsDetail({
             {publishedOnLabel} {formatDate(item.date, dateLocale)}
           </p>
 
-          <div className="relative aspect-[16/9] bg-stone/10 mb-10 overflow-hidden">
-            {imgError ? (
-              <div className="absolute inset-0 flex items-center justify-center">
+          <div className="bg-stone/10 mb-10 overflow-hidden">
+            {item.video ? (
+              <video
+                src={item.video}
+                controls
+                playsInline
+                className="w-full h-auto"
+              />
+            ) : imgError ? (
+              <div className="flex items-center justify-center h-48">
                 <span className="material-symbols-outlined text-brand-navy/20 text-7xl">
                   article
                 </span>
@@ -128,7 +135,7 @@ function NewsDetail({
                 src={item.image}
                 alt={item.title}
                 onError={() => setImgError(true)}
-                className="absolute inset-0 w-full h-full object-cover"
+                className="w-full h-auto"
               />
             )}
           </div>

@@ -42,9 +42,9 @@ function PlayerModal({ player, onClose, positionLabel, jerseyLabel, skillsLabel 
         onClick={(e) => e.stopPropagation()}
       >
         {/* Photo column */}
-        <div className="relative w-full md:w-[45%] flex-shrink-0 aspect-[3/4] md:aspect-auto">
+        <div className="relative w-full md:w-[45%] flex-shrink-0 bg-stone/10">
           {imgError ? (
-            <div className="absolute inset-0 bg-stone/10 flex items-center justify-center">
+            <div className="h-64 flex items-center justify-center">
               <span className="text-6xl font-bold text-brand-navy/30">
                 {initials(player.name)}
               </span>
@@ -53,11 +53,10 @@ function PlayerModal({ player, onClose, positionLabel, jerseyLabel, skillsLabel 
             <img
               src={player.photo}
               alt={player.name}
-              className="w-full h-full object-cover"
+              className="w-full h-auto block"
               onError={() => setImgError(true)}
             />
           )}
-          <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent md:bg-gradient-to-r md:from-transparent md:to-transparent" />
         </div>
 
         {/* Details column */}
@@ -133,9 +132,8 @@ function PlayerGridCard({ player, index, onClick, positionLabel }: { player: Pla
       onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") onClick(player); }}
       aria-label={`Ver perfil de ${player.name}`}
     >
-      <div className="aspect-[3/4] overflow-hidden">
-        {imgError ? (
-          <div className="w-full h-full flex items-center justify-center bg-[#0f0d3e]">
+      {imgError ? (
+          <div className="w-full h-64 flex items-center justify-center bg-[#0f0d3e]">
             <span className="text-4xl font-bold text-brand-yellow/40">
               {initials(player.name)}
             </span>
@@ -146,10 +144,9 @@ function PlayerGridCard({ player, index, onClick, positionLabel }: { player: Pla
             alt={player.name}
             loading="lazy"
             onError={() => setImgError(true)}
-            className="w-full h-full object-cover"
+            className="w-full h-auto block"
           />
         )}
-      </div>
 
       {/* Gradient overlay */}
       <div className="absolute inset-0 bg-gradient-to-t from-[#0a0820]/90 via-[#0a0820]/20 to-transparent" />
