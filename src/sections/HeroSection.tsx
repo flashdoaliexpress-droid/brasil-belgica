@@ -1,4 +1,5 @@
 import logoHero from "../assets/Logo Hero.png";
+import heroMobile from "../assets/Fundo Hero Mobile.png";
 
 export function HeroSection() {
   return (
@@ -7,11 +8,20 @@ export function HeroSection() {
       className="relative w-full min-h-[100dvh] flex items-center justify-center overflow-hidden"
     >
       <div className="absolute inset-0 z-0">
+        {/* Mobile background */}
+        <img
+          src={heroMobile}
+          alt=""
+          aria-hidden="true"
+          className="md:hidden w-full h-full object-cover object-center"
+          fetchPriority="high"
+        />
+        {/* Desktop background */}
         <img
           src="/images/hero-bg.webp"
           alt=""
           aria-hidden="true"
-          className="w-full h-full object-cover object-bottom"
+          className="hidden md:block w-full h-full object-cover object-bottom"
           fetchPriority="high"
         />
         <div
