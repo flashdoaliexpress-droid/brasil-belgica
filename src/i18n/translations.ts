@@ -107,7 +107,7 @@ const pt: T = {
     titleHighlight: "HISTÓRIA",
     paragraphs: [
       "Fundado em 4 de abril de 2026, na cidade de Bruxelas, o Brasil nasceu com o propósito de representar a força, a união e a paixão da comunidade brasileira pelo futebol em território belga.",
-      "Mais do que um clube de futebol, o Brasil é uma família. Cada treino, cada jogo, cada vitória — e cada derrota — é vivido em conjunto. Esse espírito de união é o que nos define dentro e fora de campo: um grupo que se cuida, se respeita e caminha junto em busca dos mesmos sonhos.",
+      "Mais do que um clube de futebol, o Brasil é uma família. Cada treino, cada jogo, cada vitória e cada derrota é vivida em conjunto. Esse espírito de união é o que nos define dentro e fora de campo: um grupo que se cuida, se respeita e caminha junto em busca dos mesmos sonhos.",
       "Agora, o Brasil dá mais um passo importante em sua história: a participação na Liga Trabalhista de Bruxelas. Para um clube jovem e cheio de ambição, disputar a liga é uma conquista que representa reconhecimento, crescimento e a certeza de que o caminho que escolhemos é o certo.",
       "Hoje, o Brasil se consolida como um clube de nome forte e de grande importância para a comunidade brasileira na Bélgica, carregando consigo uma identidade de peso, orgulho e ambição para alcançar novos feitos dentro e fora de campo.",
     ],
@@ -160,7 +160,7 @@ const pt: T = {
   },
   titles: {
     title: "TÍTULOS & CONQUISTAS",
-    subtitle: "A trajetória do Brasil se constrói rodada após rodada — cada conquista é uma marca da nossa história em Bruxelas.",
+    subtitle: "A trajetória do Brasil se constrói rodada após rodada, cada conquista é uma marca da nossa história em Bruxelas.",
   },
   liga: {
     title: "LIGA TRABALHISTA",
@@ -177,7 +177,7 @@ const pt: T = {
   },
   comissao: {
     title: "COMISSÃO TÉCNICA",
-    subtitle: "Quem comanda o Brasil dentro e fora de campo. Profissionais qualificados, comprometidos e experientes — trabalhando com seriedade para desenvolver o clube e buscar grandes resultados.",
+    subtitle: "Quem comanda o Brasil dentro e fora de campo. Profissionais qualificados, comprometidos e experientes, trabalhando com seriedade para desenvolver o clube e buscar grandes resultados.",
     quote: "Vamos trabalhar com seriedade para desenvolver a equipe e buscar grandes resultados dentro e fora de campo.",
     quoteAuthor: "— Comissão Brasil",
     roles: {
@@ -223,7 +223,7 @@ const en: T = {
     titleHighlight: "STORY",
     paragraphs: [
       "Founded on 4 April 2026 in the city of Brussels, Brasil was born with the purpose of representing the strength, unity and passion of the Brazilian community for football on Belgian soil.",
-      "More than a football club, Brasil is a family. Every training session, every match, every victory — and every defeat — is experienced together. This spirit of unity is what defines us on and off the pitch: a group that looks after each other, shows mutual respect and walks together in pursuit of the same dreams.",
+      "More than a football club, Brasil is a family. Every training session, every match, every victory and every defeat is experienced together. This spirit of unity is what defines us on and off the pitch: a group that looks after each other, shows mutual respect and walks together in pursuit of the same dreams.",
       "Now, Brasil takes another important step in its history: competing in the Brussels Workers' League. For a young and ambitious club, entering the league is an achievement that represents recognition, growth and the certainty that the path we have chosen is the right one.",
       "Today, Brasil establishes itself as a club with a strong name and great importance to the Brazilian community in Belgium, carrying with it an identity of weight, pride and ambition to reach new heights on and off the pitch.",
     ],
@@ -276,7 +276,7 @@ const en: T = {
   },
   titles: {
     title: "TITLES & ACHIEVEMENTS",
-    subtitle: "Brasil's journey is built round after round — each achievement marks our history in Brussels.",
+    subtitle: "Brasil's journey is built round after round, each achievement marks our history in Brussels.",
   },
   liga: {
     title: "WORKERS' LEAGUE",
@@ -293,7 +293,7 @@ const en: T = {
   },
   comissao: {
     title: "COACHING STAFF",
-    subtitle: "The people leading Brasil on and off the pitch. Qualified, committed and experienced professionals — working seriously to develop the club and achieve great results.",
+    subtitle: "The people leading Brasil on and off the pitch. Qualified, committed and experienced professionals, working seriously to develop the club and achieve great results.",
     quote: "We will work seriously to develop the squad and pursue great results on and off the pitch.",
     quoteAuthor: "— Brasil Staff",
     roles: {
@@ -339,7 +339,7 @@ const fr: T = {
     titleHighlight: "HISTOIRE",
     paragraphs: [
       "Fondé le 4 avril 2026 dans la ville de Bruxelles, Brasil est né avec pour objectif de représenter la force, l'union et la passion de la communauté brésilienne pour le football en territoire belge.",
-      "Plus qu'un club de football, Brasil est une famille. Chaque entraînement, chaque match, chaque victoire — et chaque défaite — est vécu ensemble. Cet esprit d'union est ce qui nous définit sur et en dehors du terrain : un groupe qui prend soin de lui-même, se respecte et avance ensemble vers les mêmes rêves.",
+      "Plus qu'un club de football, Brasil est une famille. Chaque entraînement, chaque match, chaque victoire et chaque défaite est vécu ensemble. Cet esprit d'union est ce qui nous définit sur et en dehors du terrain : un groupe qui prend soin de lui-même, se respecte et avance ensemble vers les mêmes rêves.",
       "Aujourd'hui, Brasil franchit une nouvelle étape importante de son histoire : la participation à la Ligue Travailliste de Bruxelles. Pour un jeune club plein d'ambition, disputer la ligue est une conquête qui représente la reconnaissance, la croissance et la certitude que le chemin que nous avons choisi est le bon.",
       "Brasil s'affirme comme un club au nom fort et d'une grande importance pour la communauté brésilienne en Belgique, portant avec lui une identité de poids, de fierté et d'ambition pour accomplir de nouveaux exploits sur et en dehors du terrain.",
     ],
@@ -392,7 +392,7 @@ const fr: T = {
   },
   titles: {
     title: "TITRES & RÉCOMPENSES",
-    subtitle: "Le parcours de Brasil se construit journée après journée — chaque conquête marque notre histoire à Bruxelles.",
+    subtitle: "Le parcours de Brasil se construit journée après journée, chaque conquête marque notre histoire à Bruxelles.",
   },
   liga: {
     title: "LIGUE TRAVAILLISTE",
@@ -409,7 +409,7 @@ const fr: T = {
   },
   comissao: {
     title: "STAFF TECHNIQUE",
-    subtitle: "Ceux qui dirigent Brasil sur et en dehors du terrain. Professionnels qualifiés, engagés et expérimentés — travaillant sérieusement pour développer le club et obtenir de grands résultats.",
+    subtitle: "Ceux qui dirigent Brasil sur et en dehors du terrain. Professionnels qualifiés, engagés et expérimentés, travaillant sérieusement pour développer le club et obtenir de grands résultats.",
     quote: "Nous travaillerons sérieusement pour développer l'équipe et rechercher de grands résultats sur et en dehors du terrain.",
     quoteAuthor: "— Staff de Brasil",
     roles: {
@@ -455,7 +455,7 @@ const nl: T = {
     titleHighlight: "GESCHIEDENIS",
     paragraphs: [
       "Brasil werd op 4 april 2026 opgericht in de stad Brussel met het doel de kracht, eenheid en passie van de Braziliaanse gemeenschap voor voetbal op Belgisch grondgebied te vertegenwoordigen.",
-      "Meer dan een voetbalclub is Brasil een familie. Elke training, elke wedstrijd, elke overwinning — en elke nederlaag — wordt samen beleefd. Deze geest van eenheid is wat ons definieert op en naast het veld: een groep die voor elkaar zorgt, elkaar respecteert en samen optrekt naar dezelfde dromen.",
+      "Meer dan een voetbalclub is Brasil een familie. Elke training, elke wedstrijd, elke overwinning en elke nederlaag wordt samen beleefd. Deze geest van eenheid is wat ons definieert op en naast het veld: een groep die voor elkaar zorgt, elkaar respecteert en samen optrekt naar dezelfde dromen.",
       "Nu zet Brasil een nieuwe belangrijke stap in zijn geschiedenis: deelname aan de Brusselse Arbeiderscompetitie. Voor een jonge en ambitieuze club is het disputeren van de competitie een prestatie die erkenning, groei en de zekerheid vertegenwoordigt dat de weg die we hebben gekozen de juiste is.",
       "Vandaag de dag bevestigt Brasil zijn positie als een club met een sterke naam en groot belang voor de Braziliaanse gemeenschap in België, met een identiteit van gewicht, trots en ambitie om nieuwe successen te behalen binnen en buiten het veld.",
     ],
@@ -508,7 +508,7 @@ const nl: T = {
   },
   titles: {
     title: "TITELS & TROFEEËN",
-    subtitle: "Het traject van Brasil wordt ronde na ronde opgebouwd — elke verovering is een stempel in onze geschiedenis in Brussel.",
+    subtitle: "Het traject van Brasil wordt ronde na ronde opgebouwd, elke verovering is een stempel in onze geschiedenis in Brussel.",
   },
   liga: {
     title: "ARBEIDERSCOMPETITIE",
@@ -525,7 +525,7 @@ const nl: T = {
   },
   comissao: {
     title: "TECHNISCHE STAF",
-    subtitle: "De mensen die Brasil leiden op en naast het veld. Gekwalificeerde, betrokken en ervaren professionals — serieus werkend aan de ontwikkeling van de club en het behalen van grote resultaten.",
+    subtitle: "De mensen die Brasil leiden op en naast het veld. Gekwalificeerde, betrokken en ervaren professionals, serieus werkend aan de ontwikkeling van de club en het behalen van grote resultaten.",
     quote: "We zullen serieus werken aan de ontwikkeling van het elftal en streven naar grote resultaten op en naast het veld.",
     quoteAuthor: "— Staf Brasil",
     roles: {
