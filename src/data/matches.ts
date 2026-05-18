@@ -161,4 +161,44 @@ export const matches: Match[] = [
     },
     venue: "S.C. Vila Real Bruxelas",
   },
+
+  // ─── TORNEIO FC PORTUGAL 2026 — 24/05/2026 ────────────────────────────────
+  {
+    id: 7,
+    date: "2026-05-24",
+    time: "12:00",
+    competition: "Torneio FC Portugal 2026 — Veteranos",
+    tournament: "Torneio FC Portugal 2026",
+    group: "Grupo B — Veteranos",
+    status: "upcoming",
+    home: {
+      name: "Brasil",
+      short: "BBE",
+    },
+    away: {
+      name: "Os Lusitanos",
+      short: "LUS",
+      logo: "/images/Clubs/os-lusitanos.png",
+    },
+    venue: "Terrain 1",
+  },
+  {
+    id: 8,
+    date: "2026-05-24",
+    time: "14:00",
+    competition: "Torneio FC Portugal 2026 — Veteranos",
+    tournament: "Torneio FC Portugal 2026",
+    group: "Grupo B — Veteranos",
+    status: "upcoming",
+    home: {
+      name: "Brasil",
+      short: "BBE",
+    },
+    away: {
+      name: "Brazuka FC",
+      short: "BFC",
+      logo: "/images/Clubs/brazuka-fc.png",
+    },
+    venue: "Terrain 1",
+  },
 ];
