@@ -75,8 +75,8 @@ interface Props {
 export function NoticiasSection({ onOpenAll, onOpenItem }: Props) {
   const { t } = useLanguage();
   const { news } = useNews();
-  const featured = news.find((n) => n.featured) ?? news[0];
-  const rest = news.filter((n) => n.id !== featured?.id).slice(0, 2);
+  const featured = news.find((n) => n.featured) ?? news[0] ?? null;
+  const rest = featured ? news.filter((n) => n.id !== featured.id).slice(0, 2) : [];
   const { ref: titleRef, inView: titleVisible } = useInView();
 
   return (
@@ -110,18 +110,20 @@ export function NoticiasSection({ onOpenAll, onOpenItem }: Props) {
           </button>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-gutter md:gap-10">
-          <div className="lg:col-span-7" onClick={() => onOpenItem(featured.slug)}>
-            <NewsCard item={featured} large dateLocale={t.dateLocale} />
+        {featured && (
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-gutter md:gap-10">
+            <div className="lg:col-span-7" onClick={() => onOpenItem(featured.slug)}>
+              <NewsCard item={featured} large dateLocale={t.dateLocale} />
+            </div>
+            <div className="lg:col-span-5 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-gutter md:gap-10">
+              {rest.map((n) => (
+                <div key={n.id} onClick={() => onOpenItem(n.slug)}>
+                  <NewsCard item={n} dateLocale={t.dateLocale} />
+                </div>
+              ))}
+            </div>
           </div>
-          <div className="lg:col-span-5 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-gutter md:gap-10">
-            {rest.map((n) => (
-              <div key={n.id} onClick={() => onOpenItem(n.slug)}>
-                <NewsCard item={n} dateLocale={t.dateLocale} />
-              </div>
-            ))}
-          </div>
-        </div>
+        )}
       </div>
     </section>
   );
