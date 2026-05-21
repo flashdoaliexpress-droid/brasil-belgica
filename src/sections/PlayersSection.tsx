@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { players } from "../data/players";
+import { usePlayers } from "../hooks/usePlayers";
 import type { Player } from "../types";
 import { useInView } from "../hooks/useInView";
 import { useLanguage } from "../i18n/LanguageContext";
@@ -173,6 +173,7 @@ function PlayerGridCard({ player, index, onClick, positionLabel }: { player: Pla
 
 export function PlayersSection() {
   const { t } = useLanguage();
+  const { players } = usePlayers();
   const [activePlayer, setActivePlayer] = useState<Player | null>(null);
   const { ref: titleRef, inView: titleVisible } = useInView();
 

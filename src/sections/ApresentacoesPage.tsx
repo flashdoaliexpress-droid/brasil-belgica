@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { interviews, type Interview } from "../data/interviews";
+import { useInterviews, type Interview } from "../hooks/useInterviews";
 import { useLanguage } from "../i18n/LanguageContext";
 
 function VideoModal({ interview, onClose }: { interview: Interview; onClose: () => void }) {
@@ -105,6 +105,7 @@ interface Props {
 
 export function ApresentacoesPage({ onClose }: Props) {
   const { t } = useLanguage();
+  const { interviews } = useInterviews();
   const [activeVideo, setActiveVideo] = useState<Interview | null>(null);
 
   return (

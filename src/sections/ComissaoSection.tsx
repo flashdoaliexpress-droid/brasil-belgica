@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { staff } from "../data/staff";
+import { useStaff } from "../hooks/useStaff";
 import type { StaffMember } from "../types";
 import { useInView } from "../hooks/useInView";
 import { useLanguage } from "../i18n/LanguageContext";
@@ -62,6 +62,7 @@ function StaffDetailCard({ member, roleLabel, bio }: { member: StaffMember; role
 
 export function ComissaoSection() {
   const { t } = useLanguage();
+  const { staff } = useStaff();
   const { ref: titleRef, inView: titleVisible } = useInView();
   const { ref: gridRef, inView: gridVisible } = useInView();
 

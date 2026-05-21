@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { news } from "../data/news";
+import { useNews } from "../hooks/useNews";
 import type { NewsItem } from "../types";
 import { useLanguage } from "../i18n/LanguageContext";
 
@@ -162,6 +162,7 @@ interface Props {
 
 export function NoticiasPage({ onClose, initialSlug }: Props) {
   const { t } = useLanguage();
+  const { news } = useNews();
   const [selectedSlug, setSelectedSlug] = useState<string | null>(initialSlug ?? null);
 
   useEffect(() => {

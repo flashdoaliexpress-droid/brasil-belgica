@@ -1,4 +1,4 @@
-import { matches } from "../data/matches";
+import { useMatches } from "../hooks/useMatches";
 import type { Match, MatchTeam, Goal } from "../types";
 import { useInView } from "../hooks/useInView";
 import { useLanguage } from "../i18n/LanguageContext";
@@ -216,6 +216,7 @@ function TournamentBlock({ group, months, weekdays }: {
 
 export function CalendarioSection() {
   const { t } = useLanguage();
+  const { matches } = useMatches();
   const { ref: titleRef, inView: titleVisible } = useInView();
 
   const upcoming = matches.filter((m) => m.status !== "finished");

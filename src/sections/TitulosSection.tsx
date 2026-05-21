@@ -1,9 +1,10 @@
-import { titles } from "../data/titles";
+import { useTitles } from "../hooks/useTitles";
 import { useInView } from "../hooks/useInView";
 import { useLanguage } from "../i18n/LanguageContext";
 
 export function TitulosSection() {
   const { t } = useLanguage();
+  const { titles } = useTitles();
   const { ref: titleRef, inView: titleVisible } = useInView();
 
   return (

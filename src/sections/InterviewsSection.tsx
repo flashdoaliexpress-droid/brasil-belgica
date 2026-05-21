@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { interviews, type Interview } from "../data/interviews";
+import { useInterviews, type Interview } from "../hooks/useInterviews";
 import { useInView } from "../hooks/useInView";
 import { useLanguage } from "../i18n/LanguageContext";
 
@@ -110,6 +110,7 @@ interface Props {
 
 export function InterviewsSection({ onOpenAll }: Props) {
   const { t } = useLanguage();
+  const { interviews } = useInterviews();
   const [activeVideo, setActiveVideo] = useState<Interview | null>(null);
   const { ref: titleRef, inView: titleVisible } = useInView();
 

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { news } from "../data/news";
+import { useNews } from "../hooks/useNews";
 import type { NewsItem } from "../types";
 import { useInView } from "../hooks/useInView";
 import { useLanguage } from "../i18n/LanguageContext";
@@ -74,8 +74,9 @@ interface Props {
 
 export function NoticiasSection({ onOpenAll, onOpenItem }: Props) {
   const { t } = useLanguage();
-  const featured = news.find((n) => n.id === 3) ?? news[0];
-  const rest = [news.find((n) => n.id === 2), news.find((n) => n.id === 11)].filter(Boolean) as typeof news;
+  const { news } = useNews();
+  const featured = news.find((n) => n.featured) ?? news[0];
+  const rest = news.filter((n) => n.id !== featured?.id).slice(0, 2);
   const { ref: titleRef, inView: titleVisible } = useInView();
 
   return (

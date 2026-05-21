@@ -1,9 +1,10 @@
-import { leagueInfo, leagueStandings } from "../data/league";
+import { useLeague } from "../hooks/useLeague";
 import { useInView } from "../hooks/useInView";
 import { useLanguage } from "../i18n/LanguageContext";
 
 export function LigaSection() {
   const { t } = useLanguage();
+  const { standings: leagueStandings, info: leagueInfo } = useLeague();
   const { ref: titleRef, inView: titleVisible } = useInView();
   const { ref: tableRef, inView: tableVisible } = useInView();
 
@@ -54,7 +55,7 @@ export function LigaSection() {
                   {t.liga.classification}
                 </h3>
                 <span className="text-[11px] font-medium text-dust uppercase tracking-widest">
-                  {t.liga.round} {leagueInfo.currentRound}
+                  {t.liga.round} {leagueInfo?.current_round ?? 0}
                 </span>
               </div>
 
