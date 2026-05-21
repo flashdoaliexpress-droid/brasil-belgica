@@ -10,7 +10,7 @@ export function useNews() {
     supabase
       .from("news")
       .select("*")
-      .order("date", { ascending: false })
+      .order("sort_order", { ascending: true })
       .then(({ data }) => {
         setNews(data ?? []);
         setLoading(false);
