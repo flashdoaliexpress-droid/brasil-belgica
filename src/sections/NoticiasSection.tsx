@@ -76,7 +76,7 @@ export function NoticiasSection({ onOpenAll, onOpenItem }: Props) {
   const { t } = useLanguage();
   const { news } = useNews();
   const featured = news.find((n) => n.featured) ?? news[0] ?? null;
-  const rest = featured ? news.filter((n) => n.id !== featured.id).slice(0, 2) : [];
+  const rest = featured ? news.filter((n) => n.featured && n.id !== featured.id).slice(0, 2) : [];
   const { ref: titleRef, inView: titleVisible } = useInView();
 
   return (
