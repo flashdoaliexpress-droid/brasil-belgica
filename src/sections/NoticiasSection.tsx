@@ -39,7 +39,7 @@ function NewsCard({
           </div>
         ) : (
           <img
-            src={imgUrl(item.image, large ? 1400 : 700)}
+            src={imgUrl(item.image, 1000, 900)}
             alt={item.title}
             loading="lazy"
             onError={() => setImgError(true)}

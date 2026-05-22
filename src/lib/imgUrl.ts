@@ -11,12 +11,14 @@ const RENDER  = "/storage/v1/render/image/public/";
 export function imgUrl(
   url: string | null | undefined,
   width    = 800,
+  height?: number,
   quality  = 80
 ): string {
   if (!url) return "";
   if (!url.includes(OBJECT)) return url;
+  const h = height ? `&height=${height}` : "";
   return (
     url.replace(OBJECT, RENDER) +
-    `?width=${width}&quality=${quality}&format=webp`
+    `?width=${width}${h}&quality=${quality}&format=webp`
   );
 }

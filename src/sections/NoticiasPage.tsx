@@ -45,7 +45,7 @@ function NewsRowCard({
             </div>
           ) : (
             <img
-              src={imgUrl(item.image, 700)}
+              src={imgUrl(item.image, 1000, 900)}
               alt={item.title}
               loading="lazy"
               onError={() => setImgError(true)}
@@ -133,7 +133,7 @@ function NewsDetail({
               </div>
             ) : (
               <img
-                src={imgUrl(item.image, 1400)}
+                src={imgUrl(item.image, 1000, 900)}
                 alt={item.title}
                 onError={() => setImgError(true)}
                 className="w-full h-auto"
