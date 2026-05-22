@@ -11,6 +11,7 @@ node_modules
 dist
 dist-ssr
 *.local
+.env
 
 # Large source assets (não commitar — vídeos vão pro GitHub Releases, posts já estão em public/)
 src/entrevistas/
