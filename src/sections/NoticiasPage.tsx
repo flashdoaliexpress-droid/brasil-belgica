@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useNews } from "../hooks/useNews";
 import type { NewsItem } from "../types";
 import { useLanguage } from "../i18n/LanguageContext";
+import { imgUrl } from "../lib/imgUrl";
 
 function formatDate(iso: string, locale: string) {
   return new Date(iso + "T12:00:00").toLocaleDateString(locale, {
@@ -44,7 +45,7 @@ function NewsRowCard({
             </div>
           ) : (
             <img
-              src={item.image}
+              src={imgUrl(item.image, 700)}
               alt={item.title}
               loading="lazy"
               onError={() => setImgError(true)}
@@ -132,7 +133,7 @@ function NewsDetail({
               </div>
             ) : (
               <img
-                src={item.image}
+                src={imgUrl(item.image, 1000)}
                 alt={item.title}
                 onError={() => setImgError(true)}
                 className="w-full h-auto"

@@ -3,6 +3,7 @@ import { useStaff } from "../hooks/useStaff";
 import type { StaffMember } from "../types";
 import { useInView } from "../hooks/useInView";
 import { useLanguage } from "../i18n/LanguageContext";
+import { imgUrl } from "../lib/imgUrl";
 
 function initials(name: string): string {
   return name
@@ -27,7 +28,7 @@ function StaffDetailCard({ member, roleLabel, bio }: { member: StaffMember; role
           </div>
         ) : (
           <img
-            src={member.photo}
+            src={imgUrl(member.photo, 400)}
             alt={`${member.name} — ${member.role}`}
             className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
             loading="lazy"

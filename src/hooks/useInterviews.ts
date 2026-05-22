@@ -10,17 +10,21 @@ export interface Interview {
   date?: string;
 }
 
+let _cache: Interview[] | null = null;
+
 export function useInterviews() {
-  const [interviews, setInterviews] = useState<Interview[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [interviews, setInterviews] = useState<Interview[]>(_cache ?? []);
+  const [loading, setLoading]       = useState(!_cache);
 
   useEffect(() => {
+    if (_cache) return;
     supabase
       .from("interviews")
       .select("*")
       .order("sort_order")
       .then(({ data }) => {
-        setInterviews(data ?? []);
+        _cache = data ?? [];
+        setInterviews(_cache);
         setLoading(false);
       });
   }, []);

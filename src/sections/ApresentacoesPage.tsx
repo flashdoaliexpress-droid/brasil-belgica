@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useInterviews, type Interview } from "../hooks/useInterviews";
 import { useLanguage } from "../i18n/LanguageContext";
+import { imgUrl } from "../lib/imgUrl";
 
 function VideoModal({ interview, onClose }: { interview: Interview; onClose: () => void }) {
   useEffect(() => {
@@ -40,7 +41,7 @@ function VideoModal({ interview, onClose }: { interview: Interview; onClose: () 
           controls
           autoPlay
           playsInline
-          preload="auto"
+          preload="none"
         />
 
         <div className="mt-3 text-center">
@@ -70,7 +71,7 @@ function ApresentacaoCard({ interview, onOpen, presentationLabel }: { interview:
     >
       <div className="relative aspect-[9/16] overflow-hidden bg-stone/10">
         <img
-          src={interview.thumbnail}
+          src={imgUrl(interview.thumbnail, 400)}
           alt={interview.name}
           loading="lazy"
           className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"

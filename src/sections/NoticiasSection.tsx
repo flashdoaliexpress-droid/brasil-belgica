@@ -3,6 +3,7 @@ import { useNews } from "../hooks/useNews";
 import type { NewsItem } from "../types";
 import { useInView } from "../hooks/useInView";
 import { useLanguage } from "../i18n/LanguageContext";
+import { imgUrl } from "../lib/imgUrl";
 
 function formatDate(iso: string, locale: string) {
   return new Date(iso + "T12:00:00").toLocaleDateString(locale, {
@@ -38,7 +39,7 @@ function NewsCard({
           </div>
         ) : (
           <img
-            src={item.image}
+            src={imgUrl(item.image, 900)}
             alt={item.title}
             loading="lazy"
             onError={() => setImgError(true)}
