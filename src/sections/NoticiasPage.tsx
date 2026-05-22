@@ -133,7 +133,7 @@ function NewsDetail({
               </div>
             ) : (
               <img
-                src={imgUrl(item.image, 1000)}
+                src={imgUrl(item.image, 1400)}
                 alt={item.title}
                 onError={() => setImgError(true)}
                 className="w-full h-auto"
