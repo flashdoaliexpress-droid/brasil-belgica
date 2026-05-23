@@ -19,18 +19,18 @@ function StaffDetailCard({ member, roleLabel, bio }: { member: StaffMember; role
 
   return (
     <article className="group bg-white border border-hairline hover:border-[#0120F9]/20 hover:shadow-md transition-all duration-300 overflow-hidden flex flex-col">
-      <div className="relative w-full aspect-[4/5] overflow-hidden bg-stone/10">
+      <div className="relative w-full bg-stone/10">
         {imgError ? (
-          <div className="absolute inset-0 flex items-center justify-center bg-brand-navy/5">
+          <div className="min-h-[260px] flex items-center justify-center bg-brand-navy/5">
             <span className="text-6xl font-bold text-brand-navy/20 leading-none">
               {initials(member.name)}
             </span>
           </div>
         ) : (
           <img
-            src={imgUrl(member.photo, 400)}
+            src={member.photo}
             alt={`${member.name} — ${member.role}`}
-            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+            className="w-full h-auto block"
             loading="lazy"
             onError={() => setImgError(true)}
           />

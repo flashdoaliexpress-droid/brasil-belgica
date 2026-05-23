@@ -45,16 +45,16 @@ function PlayerModal({ player, onClose, positionLabel, jerseyLabel, skillsLabel 
         {/* Photo column */}
         <div className="relative w-[42%] md:w-[45%] flex-shrink-0 bg-stone/10">
           {imgError ? (
-            <div className="h-full min-h-[160px] flex items-center justify-center">
+            <div className="min-h-[200px] flex items-center justify-center">
               <span className="text-4xl font-bold text-brand-navy/30">
                 {initials(player.name)}
               </span>
             </div>
           ) : (
             <img
-              src={imgUrl(player.photo, 400)}
+              src={player.photo}
               alt={player.name}
-              className="w-full h-full object-cover object-top block"
+              className="w-full h-auto block"
               onError={() => setImgError(true)}
             />
           )}
