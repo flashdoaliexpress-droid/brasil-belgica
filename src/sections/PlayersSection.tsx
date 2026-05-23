@@ -3,7 +3,6 @@ import { usePlayers } from "../hooks/usePlayers";
 import type { Player } from "../types";
 import { useInView } from "../hooks/useInView";
 import { useLanguage } from "../i18n/LanguageContext";
-import { imgUrl } from "../lib/imgUrl";
 
 function initials(name: string) {
   return name.split(" ").map((p) => p[0]).slice(0, 2).join("").toUpperCase();

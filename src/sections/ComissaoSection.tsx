@@ -3,7 +3,6 @@ import { useStaff } from "../hooks/useStaff";
 import type { StaffMember } from "../types";
 import { useInView } from "../hooks/useInView";
 import { useLanguage } from "../i18n/LanguageContext";
-import { imgUrl } from "../lib/imgUrl";
 
 function initials(name: string): string {
   return name
