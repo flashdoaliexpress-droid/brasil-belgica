@@ -24,6 +24,29 @@ export interface T {
     finished: string;
     next: string;
     ourTeam: string;
+    seeAll: string;
+    pageTitle: string;
+    pageSubtitle: string;
+    backToSite: string;
+    sourceNote: string;
+    filterLabel: string;
+    filters: {
+      all: string;
+      league: string;
+      cup: string;
+      friendly: string;
+      tournament: string;
+    };
+    loading: string;
+    error: string;
+    empty: string;
+    emptyFilter: string;
+    awaiting: string;
+    awaitingSection: string;
+    venue: string;
+    win: string;
+    draw: string;
+    loss: string;
     months: string[];
     weekdays: string[];
   };
@@ -121,6 +144,23 @@ const pt: T = {
     finished: "Resultado",
     next: "Próximo",
     ourTeam: "Nosso time",
+    seeAll: "Ver calendário completo",
+    pageTitle: "CALENDÁRIO COMPLETO",
+    pageSubtitle: "Todos os jogos do Brasil, organizados por competição, com data, horário, rodada e endereço.",
+    backToSite: "Voltar ao site",
+    sourceNote: "Calendário oficial FTF 2026/27 — edição de 16/07/2026. Datas e horários sujeitos a alterações pela organização.",
+    filterLabel: "Filtrar por competição",
+    filters: { all: "Todos", league: "Liga", cup: "Copa", friendly: "Amistosos", tournament: "Torneios" },
+    loading: "Carregando jogos…",
+    error: "Não foi possível carregar o calendário agora.",
+    empty: "Nenhum jogo disponível.",
+    emptyFilter: "Nenhum jogo nesta categoria.",
+    awaiting: "Aguardando atualização",
+    awaitingSection: "Jogos aguardando atualização",
+    venue: "Local do jogo",
+    win: "Vitória",
+    draw: "Empate",
+    loss: "Derrota",
     months: ["jan", "fev", "mar", "abr", "mai", "jun", "jul", "ago", "set", "out", "nov", "dez"],
     weekdays: ["dom", "seg", "ter", "qua", "qui", "sex", "sáb"],
   },
@@ -237,6 +277,23 @@ const en: T = {
     finished: "Result",
     next: "Next",
     ourTeam: "Our team",
+    seeAll: "View full schedule",
+    pageTitle: "FULL MATCH SCHEDULE",
+    pageSubtitle: "Every Brasil match, organised by competition, with date, kick-off time, round and address.",
+    backToSite: "Back to site",
+    sourceNote: "Official FTF 2026/27 schedule — edition dated 16 July 2026. Dates and times may be changed by the organisers.",
+    filterLabel: "Filter by competition",
+    filters: { all: "All", league: "League", cup: "Cup", friendly: "Friendlies", tournament: "Tournaments" },
+    loading: "Loading matches…",
+    error: "The match schedule could not be loaded right now.",
+    empty: "No matches available.",
+    emptyFilter: "No matches in this category.",
+    awaiting: "Awaiting update",
+    awaitingSection: "Matches awaiting an update",
+    venue: "Match venue",
+    win: "Win",
+    draw: "Draw",
+    loss: "Loss",
     months: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
     weekdays: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
   },
@@ -353,6 +410,23 @@ const fr: T = {
     finished: "Résultat",
     next: "Prochain",
     ourTeam: "Notre équipe",
+    seeAll: "Voir le calendrier complet",
+    pageTitle: "CALENDRIER COMPLET",
+    pageSubtitle: "Tous les matchs de Brasil, classés par compétition, avec date, heure, journée et adresse.",
+    backToSite: "Retour au site",
+    sourceNote: "Calendrier officiel FTF 2026/27 — édition du 16/07/2026. Dates et horaires susceptibles d’être modifiés par l’organisation.",
+    filterLabel: "Filtrer par compétition",
+    filters: { all: "Tous", league: "Ligue", cup: "Coupe", friendly: "Amicaux", tournament: "Tournois" },
+    loading: "Chargement des matchs…",
+    error: "Impossible de charger le calendrier pour le moment.",
+    empty: "Aucun match disponible.",
+    emptyFilter: "Aucun match dans cette catégorie.",
+    awaiting: "Mise à jour attendue",
+    awaitingSection: "Matchs en attente de mise à jour",
+    venue: "Lieu du match",
+    win: "Victoire",
+    draw: "Nul",
+    loss: "Défaite",
     months: ["jan", "fév", "mar", "avr", "mai", "juin", "juil", "août", "sep", "oct", "nov", "déc"],
     weekdays: ["dim", "lun", "mar", "mer", "jeu", "ven", "sam"],
   },
@@ -469,6 +543,23 @@ const nl: T = {
     finished: "Resultaat",
     next: "Volgend",
     ourTeam: "Ons team",
+    seeAll: "Volledige agenda bekijken",
+    pageTitle: "VOLLEDIGE WEDSTRIJDAGENDA",
+    pageSubtitle: "Alle wedstrijden van Brasil, per competitie gerangschikt, met datum, tijd, speelronde en adres.",
+    backToSite: "Terug naar de site",
+    sourceNote: "Officiële FTF-kalender 2026/27 — editie van 16/07/2026. Datums en tijden kunnen door de organisatie worden gewijzigd.",
+    filterLabel: "Filteren op competitie",
+    filters: { all: "Alle", league: "Competitie", cup: "Beker", friendly: "Oefenwedstrijden", tournament: "Toernooien" },
+    loading: "Wedstrijden laden…",
+    error: "De wedstrijdagenda kan momenteel niet worden geladen.",
+    empty: "Geen wedstrijden beschikbaar.",
+    emptyFilter: "Geen wedstrijden in deze categorie.",
+    awaiting: "Wacht op update",
+    awaitingSection: "Wedstrijden die op een update wachten",
+    venue: "Wedstrijdlocatie",
+    win: "Winst",
+    draw: "Gelijkspel",
+    loss: "Verlies",
     months: ["jan", "feb", "mrt", "apr", "mei", "jun", "jul", "aug", "sep", "okt", "nov", "dec"],
     weekdays: ["zo", "ma", "di", "wo", "do", "vr", "za"],
   },

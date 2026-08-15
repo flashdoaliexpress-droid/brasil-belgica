@@ -27,6 +27,7 @@ interface Props {
   active: SectionId;
   onNavigate: (id: SectionId) => void;
   onOpenApresentacoes: () => void;
+  solid?: boolean;
 }
 
 function LanguageSelector({ scrolled }: { scrolled: boolean }) {
@@ -102,8 +103,9 @@ function LanguageSelector({ scrolled }: { scrolled: boolean }) {
   );
 }
 
-export function Navbar({ active, onNavigate, onOpenApresentacoes }: Props) {
+export function Navbar({ active, onNavigate, onOpenApresentacoes, solid = false }: Props) {
   const scrolled = useScrollNavbar(80);
+  const useSolidHeader = solid || scrolled;
   const [menuOpen, setMenuOpen] = useState(false);
   const { locale, setLocale, t } = useLanguage();
 
@@ -129,7 +131,7 @@ export function Navbar({ active, onNavigate, onOpenApresentacoes }: Props) {
   return (
     <header
       className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 border-b ${
-        scrolled
+        useSolidHeader
           ? "bg-white border-hairline shadow-sm"
           : "bg-transparent backdrop-blur-md border-white/5"
       }`}
@@ -144,7 +146,7 @@ export function Navbar({ active, onNavigate, onOpenApresentacoes }: Props) {
             className="flex items-center hover:opacity-80 transition-opacity flex-shrink-0"
             aria-label="Ir para o topo"
           >
-            {scrolled ? (
+            {useSolidHeader ? (
               <img
                 src={logoColorido}
                 alt="Brasil F.C."
@@ -159,7 +161,7 @@ export function Navbar({ active, onNavigate, onOpenApresentacoes }: Props) {
             )}
           </button>
 
-          <div className={`hidden md:block w-px h-5 mx-6 ${scrolled ? "bg-hairline" : "bg-white/20"}`} aria-hidden="true" />
+          <div className={`hidden md:block w-px h-5 mx-6 ${useSolidHeader ? "bg-hairline" : "bg-white/20"}`} aria-hidden="true" />
 
           <nav className="hidden md:flex items-center gap-5">
             {navLinks.map((link) => {
@@ -171,10 +173,10 @@ export function Navbar({ active, onNavigate, onOpenApresentacoes }: Props) {
                   onClick={() => handleClick(link.id)}
                   className={`text-[11px] font-bold tracking-[0.08em] uppercase transition-all duration-300 ${
                     isActive
-                      ? scrolled
+                      ? useSolidHeader
                         ? "text-ink border-b-2 border-ink pb-0.5"
                         : "text-white border-b-2 border-white pb-0.5"
-                      : scrolled
+                      : useSolidHeader
                         ? "text-stone hover:text-ink"
                         : "text-white/75 hover:text-white"
                   }`}
@@ -187,7 +189,7 @@ export function Navbar({ active, onNavigate, onOpenApresentacoes }: Props) {
               type="button"
               onClick={handleApresentacoes}
               className={`text-[11px] font-bold tracking-[0.08em] uppercase transition-all duration-300 ${
-                scrolled ? "text-stone hover:text-ink" : "text-white/75 hover:text-white"
+                useSolidHeader ? "text-stone hover:text-ink" : "text-white/75 hover:text-white"
               }`}
             >
               {t.nav.presentations}
@@ -196,13 +198,13 @@ export function Navbar({ active, onNavigate, onOpenApresentacoes }: Props) {
         </div>
 
         {/* Language selector (desktop) */}
-        <LanguageSelector scrolled={scrolled} />
+        <LanguageSelector scrolled={useSolidHeader} />
 
         {/* Hambúrguer mobile */}
         <button
           type="button"
           onClick={() => setMenuOpen((v) => !v)}
-          className={`md:hidden p-2 ${scrolled ? "text-ink" : "text-white"}`}
+          className={`md:hidden p-2 ${useSolidHeader ? "text-ink" : "text-white"}`}
           aria-label={menuOpen ? "Fechar menu" : "Abrir menu"}
         >
           <span className="material-symbols-outlined">{menuOpen ? "close" : "menu"}</span>

@@ -1,64 +1,9 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useInterviews, type Interview } from "../hooks/useInterviews";
 import { useInView } from "../hooks/useInView";
 import { useLanguage } from "../i18n/LanguageContext";
 import { imgUrl } from "../lib/imgUrl";
-
-function VideoModal({ interview, onClose }: { interview: Interview; onClose: () => void }) {
-  useEffect(() => {
-    document.body.style.overflow = "hidden";
-    const handler = (e: KeyboardEvent) => { if (e.key === "Escape") onClose(); };
-    window.addEventListener("keydown", handler);
-    return () => {
-      document.body.style.overflow = "";
-      window.removeEventListener("keydown", handler);
-    };
-  }, [onClose]);
-
-  return (
-    <div
-      className="fixed inset-0 z-[100] flex items-center justify-center bg-black/85 backdrop-blur-md p-4"
-      onClick={onClose}
-      role="dialog"
-      aria-modal="true"
-      aria-label={`Apresentação — ${interview.name}`}
-    >
-      <div
-        className="relative w-full max-w-sm animate-scale-in"
-        onClick={(e) => e.stopPropagation()}
-      >
-        <button
-          type="button"
-          onClick={onClose}
-          aria-label="Fechar"
-          className="absolute -top-10 right-0 text-white hover:text-secondary-fixed transition-colors"
-        >
-          <span className="material-symbols-outlined text-4xl">close</span>
-        </button>
-
-        <video
-          src={interview.video}
-          className="w-full h-auto block bg-black"
-          controls
-          autoPlay
-          playsInline
-          preload="auto"
-        />
-
-        <div className="mt-3 text-center">
-          <p className="font-headline-md text-headline-md text-white uppercase leading-none">
-            {interview.name}
-          </p>
-          {interview.position && (
-            <p className="text-[11px] font-bold text-secondary-fixed uppercase tracking-widest mt-1">
-              {interview.position}
-            </p>
-          )}
-        </div>
-      </div>
-    </div>
-  );
-}
+import { VideoModal } from "../components/VideoModal";
 
 function ApresentacaoCard({ interview, index, onOpen, presentationLabel }: { interview: Interview; index: number; onOpen: (i: Interview) => void; presentationLabel: string }) {
   const { ref, inView } = useInView(0.08);

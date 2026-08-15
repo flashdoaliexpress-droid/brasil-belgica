@@ -1,8 +1,10 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useNews } from "../hooks/useNews";
 import type { NewsItem } from "../types";
 import { useLanguage } from "../i18n/LanguageContext";
 import { imgUrl } from "../lib/imgUrl";
+
+const DEFAULT_TITLE = "Brasil Bélgica F.C. — Futebol. Raízes. Bruxelas.";
 
 function formatDate(iso: string, locale: string) {
   return new Date(iso + "T12:00:00").toLocaleDateString(locale, {
@@ -158,29 +160,45 @@ function NewsDetail({
 
 interface Props {
   onClose: () => void;
-  initialSlug?: string | null;
+  slug: string | null;
+  onSelect: (slug: string | null) => void;
 }
 
-export function NoticiasPage({ onClose, initialSlug }: Props) {
+export function NoticiasPage({ onClose, slug, onSelect }: Props) {
   const { t } = useLanguage();
   const { news } = useNews();
-  const [selectedSlug, setSelectedSlug] = useState<string | null>(initialSlug ?? null);
+
+  // Ordena da mais recente para a mais antiga (desempate por id desc).
+  const sortedNews = useMemo(
+    () =>
+      [...news].sort((a, b) => {
+        if (a.date !== b.date) return a.date < b.date ? 1 : -1;
+        return b.id - a.id;
+      }),
+    [news]
+  );
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "auto" });
-  }, [selectedSlug]);
+  }, [slug]);
 
+  const selected = slug ? news.find((n) => n.slug === slug) : null;
+
+  // Título do documento por notícia (ajuda no compartilhamento e na aba do navegador).
   useEffect(() => {
-    setSelectedSlug(initialSlug ?? null);
-  }, [initialSlug]);
-
-  const selected = selectedSlug ? news.find((n) => n.slug === selectedSlug) : null;
+    document.title = selected
+      ? `${selected.title} — Brasil Bélgica F.C.`
+      : `Notícias — Brasil Bélgica F.C.`;
+    return () => {
+      document.title = DEFAULT_TITLE;
+    };
+  }, [selected]);
 
   if (selected) {
     return (
       <NewsDetail
         item={selected}
-        onBack={() => setSelectedSlug(null)}
+        onBack={() => onSelect(null)}
         backToAllLabel={t.news.backToAll}
         publishedOnLabel={t.news.publishedOn}
         dateLocale={t.dateLocale}
@@ -212,8 +230,8 @@ export function NoticiasPage({ onClose, initialSlug }: Props) {
         </header>
 
         <div className="space-y-6">
-          {news.map((n) => (
-            <NewsRowCard key={n.id} item={n} onOpen={setSelectedSlug} readMoreLabel={t.news.readMore} dateLocale={t.dateLocale} />
+          {sortedNews.map((n) => (
+            <NewsRowCard key={n.id} item={n} onOpen={onSelect} readMoreLabel={t.news.readMore} dateLocale={t.dateLocale} />
           ))}
         </div>
       </div>

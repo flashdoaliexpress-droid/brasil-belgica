@@ -42,7 +42,7 @@ function reconstruct(row: MatchRow, goalRows: GoalRow[]): Match {
   return {
     id: row.id,
     date: row.date,
-    time: row.time,
+    time: row.time.slice(0, 5),
     competition: row.competition,
     tournament: row.tournament ?? undefined,
     group: row.group ?? undefined,
@@ -69,12 +69,18 @@ function reconstruct(row: MatchRow, goalRows: GoalRow[]): Match {
 export function useMatches() {
   const [matches, setMatches] = useState<Match[]>([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     Promise.all([
       supabase.from("matches").select("*").order("date").order("time"),
       supabase.from("goals").select("*"),
     ]).then(([matchRes, goalRes]) => {
+      if (matchRes.error || goalRes.error) {
+        setError(matchRes.error?.message ?? goalRes.error?.message ?? "Falha ao carregar os jogos.");
+        setLoading(false);
+        return;
+      }
       const matchRows = (matchRes.data ?? []) as MatchRow[];
       const goalRows = (goalRes.data ?? []) as GoalRow[];
 
@@ -83,8 +89,11 @@ export function useMatches() {
       );
       setMatches(built);
       setLoading(false);
+    }).catch((requestError: unknown) => {
+      setError(requestError instanceof Error ? requestError.message : "Falha ao carregar os jogos.");
+      setLoading(false);
     });
   }, []);
 
-  return { matches, loading };
+  return { matches, loading, error };
 }
