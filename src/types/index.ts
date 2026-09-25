@@ -22,7 +22,7 @@ export type PlayerPosition =
 export interface StaffMember {
   id: number;
   name: string;
-  role: "Presidente" | "Diretor" | "Treinador";
+  role: "Presidente" | "Diretor de Marketing" | "Vice-Diretor" | "Treinador";
   photo: string;
   bio?: string;
 }

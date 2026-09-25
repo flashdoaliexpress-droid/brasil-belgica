@@ -2,7 +2,6 @@ import { useState } from "react";
 import { useInterviews, type Interview } from "../hooks/useInterviews";
 import { useInView } from "../hooks/useInView";
 import { useLanguage } from "../i18n/LanguageContext";
-import { imgUrl } from "../lib/imgUrl";
 import { VideoModal } from "../components/VideoModal";
 
 function ApresentacaoCard({ interview, index, onOpen, presentationLabel }: { interview: Interview; index: number; onOpen: (i: Interview) => void; presentationLabel: string }) {
@@ -21,7 +20,7 @@ function ApresentacaoCard({ interview, index, onOpen, presentationLabel }: { int
     >
       <div className="relative aspect-[9/16] overflow-hidden bg-stone/10">
         <img
-          src={imgUrl(interview.thumbnail, 400)}
+          src={interview.thumbnail}
           alt={interview.name}
           loading="lazy"
           className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"

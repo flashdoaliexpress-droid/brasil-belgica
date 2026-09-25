@@ -29,7 +29,7 @@ export function AboutSection() {
   const { ref: imgRef, inView: imgVisible } = useInView();
 
   return (
-    <section id="sobre" className="bg-page w-full">
+    <section id="sobre" className="bg-page w-full overflow-x-clip">
       <div className="relative w-full pt-32 pb-section-gap px-container-padding-mobile md:px-container-padding-desktop max-w-7xl mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-gutter mb-section-gap">
           <div className="md:col-span-7 flex flex-col justify-center">

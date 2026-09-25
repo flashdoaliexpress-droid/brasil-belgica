@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState } from "react";
 import type { Interview } from "../hooks/useInterviews";
-import { imgUrl } from "../lib/imgUrl";
 
 // Player mínimo: só o vídeo + um botão play/pause.
 // Sem controles nativos (timeline, mute, fullscreen/zoom, PiP, menu de 3 pontos).
@@ -51,7 +50,7 @@ export function VideoModal({ interview, onClose }: { interview: Interview; onClo
           <video
             ref={videoRef}
             src={interview.video}
-            poster={imgUrl(interview.thumbnail, 400)}
+            poster={interview.thumbnail}
             className="w-full h-auto block bg-black"
             playsInline
             autoPlay

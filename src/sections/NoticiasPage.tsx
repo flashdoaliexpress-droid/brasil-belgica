@@ -2,7 +2,6 @@ import { useEffect, useMemo, useState } from "react";
 import { useNews } from "../hooks/useNews";
 import type { NewsItem } from "../types";
 import { useLanguage } from "../i18n/LanguageContext";
-import { imgUrl } from "../lib/imgUrl";
 
 const DEFAULT_TITLE = "Brasil Bélgica F.C. — Futebol. Raízes. Bruxelas.";
 
@@ -39,7 +38,7 @@ function NewsRowCard({
     >
       <div className="grid grid-cols-1 sm:grid-cols-12">
         <div className="sm:col-span-5 relative aspect-[16/10] sm:aspect-auto overflow-hidden bg-stone/10">
-          {imgError ? (
+          {imgError || !item.image ? (
             <div className="absolute inset-0 flex items-center justify-center">
               <span className="material-symbols-outlined text-brand-navy/20 text-6xl">
                 article
@@ -47,7 +46,7 @@ function NewsRowCard({
             </div>
           ) : (
             <img
-              src={imgUrl(item.image, 1000, 900)}
+              src={item.image}
               alt={item.title}
               loading="lazy"
               onError={() => setImgError(true)}
@@ -120,14 +119,15 @@ function NewsDetail({
           </p>
 
           <div className="bg-stone/10 mb-10 overflow-hidden">
-            {item.video ? (
+            {item.video && /^(https?:\/\/|\/)/.test(item.video) ? (
               <video
                 src={item.video}
+                poster={item.image || undefined}
                 controls
                 playsInline
                 className="w-full h-auto"
               />
-            ) : imgError ? (
+            ) : imgError || !item.image ? (
               <div className="flex items-center justify-center h-48">
                 <span className="material-symbols-outlined text-brand-navy/20 text-7xl">
                   article
@@ -135,7 +135,7 @@ function NewsDetail({
               </div>
             ) : (
               <img
-                src={imgUrl(item.image, 1000, 900)}
+                src={item.image}
                 alt={item.title}
                 onError={() => setImgError(true)}
                 className="w-full h-auto"

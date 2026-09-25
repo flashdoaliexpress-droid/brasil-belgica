@@ -3,7 +3,6 @@ import { useNews } from "../hooks/useNews";
 import type { NewsItem } from "../types";
 import { useInView } from "../hooks/useInView";
 import { useLanguage } from "../i18n/LanguageContext";
-import { imgUrl } from "../lib/imgUrl";
 
 function formatDate(iso: string, locale: string) {
   return new Date(iso + "T12:00:00").toLocaleDateString(locale, {
@@ -31,7 +30,7 @@ function NewsCard({
           large ? "aspect-[16/10]" : "aspect-[16/9]"
         }`}
       >
-        {imgError ? (
+        {imgError || !item.image ? (
           <div className="absolute inset-0 flex items-center justify-center bg-[#0120F9]/5">
             <span className="material-symbols-outlined text-brand-navy/20 text-6xl">
               article
@@ -39,7 +38,7 @@ function NewsCard({
           </div>
         ) : (
           <img
-            src={imgUrl(item.image, 1000, 900)}
+            src={item.image}
             alt={item.title}
             loading="lazy"
             onError={() => setImgError(true)}
