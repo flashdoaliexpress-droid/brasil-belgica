@@ -18,6 +18,7 @@ function initials(name: string): string {
 const positionStyle: Record<PlayerPosition, string> = {
   Goleiro: "bg-brand-green text-black",
   Zagueiro: "bg-white/10 backdrop-blur-md text-on-surface border border-white/20",
+  "Zagueiro • Volante": "bg-white/10 backdrop-blur-md text-on-surface border border-white/20",
   "Lateral Direito": "bg-white/10 backdrop-blur-md text-on-surface border border-white/20",
   "Lateral Esquerdo": "bg-white/10 backdrop-blur-md text-on-surface border border-white/20",
   Volante: "bg-white/10 backdrop-blur-md text-on-surface border border-white/20",
@@ -37,7 +38,7 @@ export function PlayerCard({ player, active }: Props) {
     <div
       className={`relative w-[260px] h-[370px] flex-shrink-0 overflow-hidden bg-surface-container-lowest transition-all duration-300 ${stateClass}`}
     >
-      {imgError ? (
+      {!player.photo || imgError ? (
         <div className="absolute inset-0 bg-inverse-primary flex items-center justify-center">
           <span className="font-headline-xl text-headline-xl text-on-primary-container opacity-40 select-none">
             {initials(player.name)}

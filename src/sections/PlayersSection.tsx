@@ -43,7 +43,7 @@ function PlayerModal({ player, onClose, positionLabel, jerseyLabel, skillsLabel 
       >
         {/* Photo column */}
         <div className="relative w-[42%] md:w-[45%] flex-shrink-0 bg-stone/10">
-          {imgError ? (
+          {!player.photo || imgError ? (
             <div className="min-h-[200px] flex items-center justify-center">
               <span className="text-4xl font-bold text-brand-navy/30">
                 {initials(player.name)}
@@ -132,7 +132,7 @@ function PlayerGridCard({ player, index, onClick, positionLabel }: { player: Pla
       onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") onClick(player); }}
       aria-label={`Ver perfil de ${player.name}`}
     >
-      {imgError ? (
+      {!player.photo || imgError ? (
           <div className="w-full h-64 flex items-center justify-center bg-[#0f0d3e]">
             <span className="text-4xl font-bold text-brand-yellow/40">
               {initials(player.name)}

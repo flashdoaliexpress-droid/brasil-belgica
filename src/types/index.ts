@@ -2,7 +2,7 @@ export interface Player {
   id: number;
   name: string;
   position: PlayerPosition;
-  photo: string;
+  photo?: string | null;
   number?: number;
   skills?: string[];
 }
@@ -10,6 +10,7 @@ export interface Player {
 export type PlayerPosition =
   | "Goleiro"
   | "Zagueiro"
+  | "Zagueiro • Volante"
   | "Lateral Direito"
   | "Lateral Esquerdo"
   | "Volante"

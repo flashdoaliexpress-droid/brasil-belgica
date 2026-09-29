@@ -172,6 +172,7 @@ const pt: T = {
     positions: {
       Goleiro: "Goleiro",
       Zagueiro: "Zagueiro",
+      "Zagueiro • Volante": "Zagueiro • Volante",
       "Lateral Direito": "Lateral Direito",
       "Lateral Esquerdo": "Lateral Esquerdo",
       Volante: "Volante",
@@ -307,6 +308,7 @@ const en: T = {
     positions: {
       Goleiro: "Goalkeeper",
       Zagueiro: "Centre-back",
+      "Zagueiro • Volante": "Centre-back • Defensive Midfielder",
       "Lateral Direito": "Right Back",
       "Lateral Esquerdo": "Left Back",
       Volante: "Defensive Midfielder",
@@ -442,6 +444,7 @@ const fr: T = {
     positions: {
       Goleiro: "Gardien de but",
       Zagueiro: "Défenseur central",
+      "Zagueiro • Volante": "Défenseur central • Milieu défensif",
       "Lateral Direito": "Latéral droit",
       "Lateral Esquerdo": "Latéral gauche",
       Volante: "Milieu défensif",
@@ -577,6 +580,7 @@ const nl: T = {
     positions: {
       Goleiro: "Doelman",
       Zagueiro: "Centrale verdediger",
+      "Zagueiro • Volante": "Centrale verdediger • Defensieve middenvelder",
       "Lateral Direito": "Rechtsback",
       "Lateral Esquerdo": "Linksback",
       Volante: "Defensieve middenvelder",
