@@ -26,7 +26,7 @@ interface GoalRow {
   id: number;
   match_id: number;
   team_side: "home" | "away";
-  minute: number;
+  minute: number | null;
   player: string;
   own_goal: boolean;
 }

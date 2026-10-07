@@ -39,7 +39,7 @@ export interface ClubInfo {
 export type MatchStatus = "upcoming" | "live" | "finished";
 
 export interface Goal {
-  minute: number;
+  minute: number | null;
   player: string;
   ownGoal?: boolean;
 }

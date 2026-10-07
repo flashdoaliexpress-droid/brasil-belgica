@@ -46,7 +46,9 @@ function GoalsList({ goals }: { goals: Goal[] }) {
       {goals.map((goal, index) => (
         <span key={`${goal.minute}-${goal.player}-${index}`}>
           {index > 0 && <span className="mx-1 opacity-40">·</span>}
-          <span className="font-semibold text-stone">{goal.minute}'</span>{" "}
+          {goal.minute != null && goal.minute > 0 && (
+            <span className="font-semibold text-stone">{goal.minute}' </span>
+          )}
           {goal.player}
           {goal.ownGoal && <span className="opacity-60"> (GC)</span>}
         </span>

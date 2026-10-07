@@ -1,16 +1,24 @@
-import { CompetitionMatchBlock } from "../components/CompetitionMatchBlock";
+import MatchTimelineBlock from "../components/MatchTimelineBlock";
 import { useMatches } from "../hooks/useMatches";
 import { useInView } from "../hooks/useInView";
 import { useLanguage } from "../i18n/LanguageContext";
-import { groupMatchesByCompetition, homeMatchesForGroup, localIsoDate } from "../lib/matches";
+import { localIsoDate, splitMatchesByTimeline } from "../lib/matches";
 
 export function CalendarioSection({ onOpenAll }: { onOpenAll: () => void }) {
   const { t } = useLanguage();
   const { matches, loading, error } = useMatches();
   const { ref: titleRef, inView: titleVisible } = useInView();
   const today = localIsoDate();
-  const groups = groupMatchesByCompetition(matches, t.calendar.filters.friendly, today)
-    .map((group) => ({ ...group, matches: homeMatchesForGroup(group.matches, today) }));
+  const timeline = splitMatchesByTimeline(matches, today);
+  const labels = {
+    win: t.calendar.win,
+    draw: t.calendar.draw,
+    loss: t.calendar.loss,
+    awaiting: t.calendar.awaiting,
+    venue: t.calendar.venue,
+  };
+  const visibleCount =
+    timeline.upcoming.length + timeline.pending.length + timeline.finished.length;
 
   return (
     <section id="calendario" className="bg-page-alt w-full py-section-gap">
@@ -39,10 +47,31 @@ export function CalendarioSection({ onOpenAll }: { onOpenAll: () => void }) {
         {!loading && !error && (
           <>
             <div className="space-y-14">
-              {groups.map((group) => <CompetitionMatchBlock key={group.key} group={group} />)}
+              <MatchTimelineBlock
+                title={t.calendar.upcoming}
+                matches={timeline.upcoming.slice(0, 3)}
+                months={t.calendar.months}
+                weekdays={t.calendar.weekdays}
+                labels={labels}
+              />
+              <MatchTimelineBlock
+                title={t.calendar.awaitingSection}
+                matches={timeline.pending.slice(0, 3)}
+                months={t.calendar.months}
+                weekdays={t.calendar.weekdays}
+                labels={labels}
+                awaitingUpdate
+              />
+              <MatchTimelineBlock
+                title={t.calendar.results}
+                matches={timeline.finished.slice(0, 3)}
+                months={t.calendar.months}
+                weekdays={t.calendar.weekdays}
+                labels={labels}
+              />
             </div>
 
-            {groups.length === 0 && (
+            {visibleCount === 0 && (
               <p className="text-sm text-stone">{t.calendar.empty}</p>
             )}
 

@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import { useNews } from "../hooks/useNews";
 import type { NewsItem } from "../types";
 import { useLanguage } from "../i18n/LanguageContext";
@@ -168,16 +168,6 @@ export function NoticiasPage({ onClose, slug, onSelect }: Props) {
   const { t } = useLanguage();
   const { news } = useNews();
 
-  // Ordena da mais recente para a mais antiga (desempate por id desc).
-  const sortedNews = useMemo(
-    () =>
-      [...news].sort((a, b) => {
-        if (a.date !== b.date) return a.date < b.date ? 1 : -1;
-        return b.id - a.id;
-      }),
-    [news]
-  );
-
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "auto" });
   }, [slug]);
@@ -230,7 +220,7 @@ export function NoticiasPage({ onClose, slug, onSelect }: Props) {
         </header>
 
         <div className="space-y-6">
-          {sortedNews.map((n) => (
+          {news.map((n) => (
             <NewsRowCard key={n.id} item={n} onOpen={onSelect} readMoreLabel={t.news.readMore} dateLocale={t.dateLocale} />
           ))}
         </div>

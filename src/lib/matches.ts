@@ -9,6 +9,12 @@ export interface CompetitionMatchGroup {
   matches: Match[];
 }
 
+export interface MatchTimeline {
+  upcoming: Match[];
+  pending: Match[];
+  finished: Match[];
+}
+
 function normalize(value: string) {
   return value
     .normalize("NFD")
@@ -46,6 +52,23 @@ export function localIsoDate(date = new Date()) {
 
 export function compareMatches(a: Match, b: Match) {
   return `${a.date}T${a.time}`.localeCompare(`${b.date}T${b.time}`);
+}
+
+export function splitMatchesByTimeline(
+  matches: Match[],
+  today = localIsoDate()
+): MatchTimeline {
+  return {
+    upcoming: matches
+      .filter((match) => match.status !== "finished" && match.date >= today)
+      .sort(compareMatches),
+    pending: matches
+      .filter((match) => match.status !== "finished" && match.date < today)
+      .sort((a, b) => compareMatches(b, a)),
+    finished: matches
+      .filter((match) => match.status === "finished")
+      .sort((a, b) => compareMatches(b, a)),
+  };
 }
 
 function relevantOrder(matches: Match[], today: string) {
