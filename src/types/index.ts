@@ -8,6 +8,7 @@ export interface Player {
 }
 
 export type PlayerPosition =
+  | "Jogador"
   | "Goleiro"
   | "Zagueiro"
   | "Zagueiro • Volante"

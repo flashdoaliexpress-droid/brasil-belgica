@@ -170,6 +170,7 @@ const pt: T = {
     jersey: "Camisa nº",
     skillsLabel: "Habilidades",
     positions: {
+      Jogador: "Jogador",
       Goleiro: "Goleiro",
       Zagueiro: "Zagueiro",
       "Zagueiro • Volante": "Zagueiro • Volante",
@@ -306,6 +307,7 @@ const en: T = {
     jersey: "Jersey no.",
     skillsLabel: "Skills",
     positions: {
+      Jogador: "Player",
       Goleiro: "Goalkeeper",
       Zagueiro: "Centre-back",
       "Zagueiro • Volante": "Centre-back • Defensive Midfielder",
@@ -442,6 +444,7 @@ const fr: T = {
     jersey: "Maillot n°",
     skillsLabel: "Compétences",
     positions: {
+      Jogador: "Joueur",
       Goleiro: "Gardien de but",
       Zagueiro: "Défenseur central",
       "Zagueiro • Volante": "Défenseur central • Milieu défensif",
@@ -578,6 +581,7 @@ const nl: T = {
     jersey: "Rugnummer",
     skillsLabel: "Vaardigheden",
     positions: {
+      Jogador: "Speler",
       Goleiro: "Doelman",
       Zagueiro: "Centrale verdediger",
       "Zagueiro • Volante": "Centrale verdediger • Defensieve middenvelder",

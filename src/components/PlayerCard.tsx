@@ -16,6 +16,7 @@ function initials(name: string): string {
 }
 
 const positionStyle: Record<PlayerPosition, string> = {
+  Jogador: "bg-white/10 backdrop-blur-md text-on-surface border border-white/20",
   Goleiro: "bg-brand-green text-black",
   Zagueiro: "bg-white/10 backdrop-blur-md text-on-surface border border-white/20",
   "Zagueiro • Volante": "bg-white/10 backdrop-blur-md text-on-surface border border-white/20",
