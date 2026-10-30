@@ -2,7 +2,8 @@ import { useRef, useState } from "react";
 import { useScrollNavbar } from "../hooks/useScrollNavbar";
 import { useLanguage } from "../i18n/LanguageContext";
 import type { Locale } from "../i18n/translations";
-import logoColorido from "../assets/crest-transparent.png";
+import logoColorido from "../assets/Logo header.png";
+import logoTransparente from "../assets/crest-transparent.png";
 
 type SectionId =
   | "hero"
@@ -147,7 +148,7 @@ export function Navbar({ active, onNavigate, onOpenApresentacoes, solid = false 
             aria-label="Ir para o topo"
           >
             <img
-              src={logoColorido}
+              src={useSolidHeader ? logoColorido : logoTransparente}
               alt="Brasil F.C."
               className="h-10 md:h-12 w-auto object-contain transition-[filter] duration-300"
               style={{
