@@ -1,4 +1,4 @@
-import logoHero from "../assets/Logo Hero.png";
+import logoHero from "../assets/crest-transparent.png";
 import heroMobile from "../assets/Fundo Hero Mobile.png";
 
 export function HeroSection() {
@@ -37,7 +37,11 @@ export function HeroSection() {
         <img
           src={logoHero}
           alt="Brasil F.C."
-          className="w-56 md:w-72 h-auto mb-3 brightness-0 invert"
+          className="w-56 md:w-72 h-auto mb-3"
+          style={{
+            filter:
+              "grayscale(1) brightness(1.7) contrast(1.1) drop-shadow(0 8px 18px rgba(0, 0, 0, 0.38))",
+          }}
           loading="eager"
           fetchPriority="high"
         />

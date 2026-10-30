@@ -2,7 +2,7 @@ import { useRef, useState } from "react";
 import { useScrollNavbar } from "../hooks/useScrollNavbar";
 import { useLanguage } from "../i18n/LanguageContext";
 import type { Locale } from "../i18n/translations";
-import logoColorido from "../assets/Logo header.png";
+import logoColorido from "../assets/crest-transparent.png";
 
 type SectionId =
   | "hero"
@@ -149,9 +149,12 @@ export function Navbar({ active, onNavigate, onOpenApresentacoes, solid = false 
             <img
               src={logoColorido}
               alt="Brasil F.C."
-              className={`h-10 md:h-12 w-auto object-contain transition-[filter] duration-300 ${
-                useSolidHeader ? "filter-none" : "brightness-0 invert"
-              }`}
+              className="h-10 md:h-12 w-auto object-contain transition-[filter] duration-300"
+              style={{
+                filter: useSolidHeader
+                  ? "none"
+                  : "grayscale(1) brightness(1.7) contrast(1.1) drop-shadow(0 2px 5px rgba(0, 0, 0, 0.4))",
+              }}
             />
           </button>
 
