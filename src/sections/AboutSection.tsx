@@ -1,4 +1,4 @@
-import sobreNos from "../assets/SOBRE NÓS.png";
+import sobreNos from "../assets/Logo Hero.png";
 import { useInView } from "../hooks/useInView";
 import { useLanguage } from "../i18n/LanguageContext";
 

@@ -37,7 +37,7 @@ export function HeroSection() {
         <img
           src={logoHero}
           alt="Brasil F.C."
-          className="w-56 md:w-72 h-auto mb-3"
+          className="w-56 md:w-72 h-auto mb-3 brightness-0 invert"
           loading="eager"
           fetchPriority="high"
         />

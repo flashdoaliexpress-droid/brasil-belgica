@@ -2,7 +2,7 @@ import { useRef, useState } from "react";
 import { useScrollNavbar } from "../hooks/useScrollNavbar";
 import { useLanguage } from "../i18n/LanguageContext";
 import type { Locale } from "../i18n/translations";
-import logoColorido from "../assets/SOBRE NÓS.png";
+import logoColorido from "../assets/Logo header.png";
 
 type SectionId =
   | "hero"
@@ -146,19 +146,13 @@ export function Navbar({ active, onNavigate, onOpenApresentacoes, solid = false 
             className="flex items-center hover:opacity-80 transition-opacity flex-shrink-0"
             aria-label="Ir para o topo"
           >
-            {useSolidHeader ? (
-              <img
-                src={logoColorido}
-                alt="Brasil F.C."
-                className="h-10 md:h-12 w-auto object-contain"
-              />
-            ) : (
-              <img
-                src="/images/logo-header.webp"
-                alt="Brasil F.C."
-                className="h-10 md:h-12 w-auto"
-              />
-            )}
+            <img
+              src={logoColorido}
+              alt="Brasil F.C."
+              className={`h-10 md:h-12 w-auto object-contain transition-[filter] duration-300 ${
+                useSolidHeader ? "filter-none" : "brightness-0 invert"
+              }`}
+            />
           </button>
 
           <div className={`hidden md:block w-px h-5 mx-6 ${useSolidHeader ? "bg-hairline" : "bg-white/20"}`} aria-hidden="true" />
